@@ -3,76 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juris AI | Kostenlose Rechtsberatung</title>
+    <title>Juris AI | Die Zukunft der Rechtsberatung</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
     <style>
-        /* EXTRA STABILER CODE - BITTE NICHTS ÄNDERN */
+        :root {
+            --bg: #050505;
+            --gold: #c5a059;
+            --text: #ffffff;
+            --dim: #888888;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-color: #050505 !important;
-            color: #ffffff !important;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 50% -20%, #1a1a1a 0%, #050505 80%);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
+
+        /* Navigation */
+        nav {
+            padding: 30px 50px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-outline {
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            padding: 8px 20px;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover { background: var(--gold); color: #000; box-shadow: 0 0 15px rgba(197, 160, 89, 0.4); }
+
+        /* Main Content */
         main {
-            padding: 100px 20px;
-            flex: 1;
-        }
-        h1 {
-            color: #c5a059;
-            font-size: 2rem;
-            margin-bottom: 50px;
-        }
-        .input-box {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 30px;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
-            border-radius: 8px;
+            padding: 60px 20px;
+            flex: 1;
+            text-align: center;
         }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            font-size: 1.8rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            background: linear-gradient(to right, #fff, var(--gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Formularbereich */
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 60px;
+        }
+
         input, textarea {
             width: 100%;
-            background: #000;
-            border: 1px solid #444;
-            color: #fff;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        .btn {
-            background: #c5a059;
-            color: #000;
+            background: transparent;
             border: none;
-            padding: 15px 30px;
-            font-weight: bold;
-            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            color: #fff;
+            padding: 15px 0;
+            margin-bottom: 25px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus, textarea:focus { border-bottom-color: var(--gold); }
+
+        .submit-btn {
             width: 100%;
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 15px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.4s;
         }
-        footer {
-            padding: 40px;
-            border-top: 1px solid #222;
+
+        .submit-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+        /* Dashboard Preview */
+        .dashboard { margin-top: 40px; text-align: left; }
+        .dashboard h3 { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+        
+        .item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 0; border-bottom: 1px solid var(--border);
+            color: var(--dim); font-size: 13px;
         }
-        a { color: #888; text-decoration: none; margin: 0 10px; font-size: 12px; }
+
+        .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px var(--gold); }
+
+        /* Footer Accordions */
+        .acc-btn {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
+            color: var(--dim); padding: 20px 0; text-align: left; cursor: pointer;
+            text-transform: uppercase; font-size: 10px; letter-spacing: 1px;
+            display: flex; justify-content: space-between;
+        }
+
+        .panel { max-height: 0; overflow: hidden; transition: 0.3s; color: #666; font-size: 13px; line-height: 1.6; }
+
+        /* Footer */
+        footer { padding: 50px 20px; text-align: center; border-top: 1px solid var(--border); }
+        .f-link { color: var(--dim); text-decoration: none; font-size: 10px; letter-spacing: 1px; margin: 0 15px; text-transform: uppercase; transition: 0.3s; }
+        .f-link:hover { color: var(--gold); }
+
+        .success { display: none; color: var(--gold); letter-spacing: 2px; padding: 20px; border: 1px solid var(--gold); margin-top: 20px; }
     </style>
 </head>
 <body>
+
+    <nav>
+        <a href="#" class="btn-outline">Account</a>
+    </nav>
+
     <main>
         <h1>Sag mir, welche juristische Frage dich interessiert</h1>
-        <div class="input-box">
-            <form action="https://formspree.io/f/mbdpagwz" method="POST">
-                <input type="email" name="email" placeholder="Deine E-Mail" required>
-                <textarea name="frage" placeholder="Deine Frage..." rows="5" required></textarea>
-                <button type="submit" class="btn">ANFRAGE ABSENDEN</button>
+
+        <div class="glass-card">
+            <form id="mainForm" action="https://formspree.io/f/mbdpagwz" method="POST">
+                <input type="email" name="Email" placeholder="DEINE E-MAIL" required>
+                <textarea name="Anfrage" placeholder="DEIN RECHTLICHES ANLIEGEN..." rows="4" required></textarea>
+                <button type="submit" class="submit-btn" id="sBtn">ANFRAGE ABSENDEN</button>
             </form>
+            <div id="msg" class="success">ANFRAGE ÜBERMITTELT. SYSTEM ANTWORTET ZEITNAH.</div>
+        </div>
+
+        <div class="dashboard">
+            <h3>Letzte Anfragen</h3>
+            <div class="item"><span>Kaufvertrag über digitale Güter...</span> <div class="dot"></div></div>
+            <div class="item"><span>Mietminderung wegen Eigenbedarf...</span></div>
+        </div>
+
+        <div style="margin-top: 60px;">
+            <button class="acc-btn" onclick="toggle(this)">Disclaimer <span>+</span></button>
+            <div class="panel"><p style="padding: 15px 0;">Keine professionelle Rechtsberatung. Ein Mandatsverhältnis kommt nicht zustande. Alle Auskünfte ohne Gewähr.</p></div>
+
+            <button class="acc-btn" onclick="toggle(this)">Vorschläge <span>+</span></button>
+            <div class="panel"><p style="padding: 15px 0;">Senden Sie uns Feedback zur algorithmischen Erfassung Ihrer Anliegen.</p></div>
         </div>
     </main>
+
     <footer>
-        <a href="impressum.html">IMPRESSUM</a>
-        <a href="datenschutz.html">DATENSCHUTZ</a>
+        <div style="margin-bottom: 20px;">
+            <a href="impressum.html" class="f-link">Impressum</a>
+            <a href="datenschutz.html" class="f-link">Datenschutz</a>
+        </div>
+        <a href="#" class="f-link" style="color:var(--gold)">// FOLLOW ON TIKTOK</a>
     </footer>
+
+    <script>
+        function toggle(btn) {
+            btn.classList.toggle("active");
+            var panel = btn.nextElementSibling;
+            panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+            btn.querySelector("span").innerHTML = panel.style.maxHeight ? "-" : "+";
+        }
+
+        var f = document.getElementById("mainForm");
+        f.onsubmit = async (e) => {
+            e.preventDefault();
+            var b = document.getElementById("sBtn");
+            b.innerHTML = "SENDING...";
+            fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' }})
+            .then(r => { if(r.ok) { f.style.display="none"; document.getElementById("msg").style.display="block"; } });
+        };
+    </script>
 </body>
 </html>
