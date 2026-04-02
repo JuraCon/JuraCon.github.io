@@ -3,89 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Profi-Website</title>
+    <title>Kostenlose Rechtsberatung | Direkt & Verständlich</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        /* Farbpalette & Grunddesign */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f5f5f5;
+            --gold: #d4af37;
+            --dark-grey: #1a1a1a;
+            --light-grey: #a0a0a0;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
-            color: #333;
-            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 4rem 2rem;
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+
+        .login-btn {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid var(--gold);
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.8;
+
+        .login-btn:hover {
+            background-color: var(--gold);
+            color: var(--bg-color);
         }
-        .container {
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            width: 100%;
         }
-        section {
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
             margin-bottom: 2rem;
+            color: var(--text-color);
         }
-        .button {
-            display: inline-block;
-            background-color: #3498db;
+
+        /* Eingabefeld */
+        .input-group {
+            width: 100%;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        textarea {
+            width: 100%;
+            background-color: var(--dark-grey);
+            border: 1px solid #333;
             color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
+            padding: 20px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--gold);
+            color: var(--bg-color);
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
             margin-top: 10px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
-        .button:hover {
-            background-color: #2980b9;
+
+        .submit-btn:hover {
+            opacity: 0.9;
         }
+
+        .success-msg {
+            display: none;
+            color: var(--gold);
+            text-align: center;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        /* Dashboard Placeholder (Phase 1 Optik) */
+        .dashboard-preview {
+            width: 100%;
+            margin-top: 2rem;
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+        }
+
+        .dashboard-preview h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .request-item {
+            background-color: var(--dark-grey);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            border-left: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .request-item:hover {
+            border-left: 2px solid var(--gold);
+        }
+
+        .gold-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            margin-left: 10px;
+            box-shadow: 0 0 8px var(--gold);
+        }
+
+        /* Akkordeons (Reiter unten) */
+        .accordion-container {
+            width: 100%;
+            margin-top: 4rem;
+        }
+
+        .accordion {
+            background-color: transparent;
+            color: var(--light-grey);
+            cursor: pointer;
+            padding: 18px 0;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #333;
+            text-align: left;
+            outline: none;
+            font-size: 1rem;
+            transition: 0.4s;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .accordion:hover, .accordion.active {
+            color: var(--gold);
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: transparent;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            color: var(--light-grey);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            background-color: #ecf0f1;
-            font-size: 0.9rem;
+            border-top: 1px solid #333;
+            margin-top: auto;
+        }
+
+        .tiktok-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .tiktok-link:hover {
+            color: var(--gold);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Hallo, ich bin [Dein Name]</h1>
-        <p>Willkommen auf meiner neuen, blitzschnellen Website.</p>
-    </header>
-
-    <div class="container">
-        <section>
-            <h2>Über mich / Mein Projekt</h2>
-            <p>Hier ist Platz für deinen Text. Du kannst diese Struktur später ganz einfach ändern oder mich bitten, sie für dich anzupassen. Diese Seite ist responsiv – sie sieht also auch auf dem Smartphone super aus.</p>
-        </section>
-
-        <section>
-            <h2>Meine Dienstleistungen</h2>
-            <ul>
-                <li>Leistung 1: Tolle Sachen machen</li>
-                <li>Leistung 2: Probleme lösen</li>
-                <li>Leistung 3: Kreativ sein</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Kontakt</h2>
-            <p>Interessiert? Dann melde dich einfach bei mir!</p>
-            <a href="mailto:deine@email.de" class="button">E-Mail schreiben</a>
-        </section>
+    <div class="top-bar">
+        <a href="#" class="login-btn">Account erstellen (Demnächst)</a>
     </div>
 
+    <main>
+        <h1 class="title">Sag mir, welche juristische Frage dich interessiert!</h1>
+
+        <div class="input-group">
+            <textarea id="legalQuestion" placeholder="Beschreibe dein rechtliches Anliegen hier..."></textarea>
+            <button class="submit-btn" onclick="submitQuestion()">Anfrage senden</button>
+            <div class="success-msg" id="successMessage">Dein Anliegen wurde übermittelt - du erhältst zeitnah eine Antwort.</div>
+        </div>
+
+        <div class="dashboard-preview">
+            <h3>Meine letzten Anfragen</h3>
+            <div class="request-item">
+                <span>Ist ein mündlicher Vertrag über den Kauf eines...</span>
+                <div class="gold-dot" title="Antwort verfügbar"></div>
+            </div>
+            <div class="request-item">
+                <span>Darf mein Vermieter die Miete um 20% erhöhen, wenn...</span>
+            </div>
+        </div>
+
+        <div class="accordion-container">
+            <button class="accordion">Wichtige rechtliche Hinweise (Disclaimer) <span>+</span></button>
+            <div class="panel">
+                <p>Diese Website bietet eine unentgeltliche rechtliche Ersteinschätzung und stellt keine professionelle, anwaltliche Rechtsberatung dar. Durch die Nutzung dieser Seite und die Beantwortung von Fragen kommt kein Mandatsverhältnis zustande. Alle Auskünfte erfolgen nach bestem Wissen und Gewissen, jedoch ohne Gewähr oder Haftung für deren Richtigkeit, Vollständigkeit oder Aktualität.</p>
+            </div>
+
+            <button class="accordion">Vorschläge & Feedback <span>+</span></button>
+            <div class="panel">
+                <p>Du hast Ideen, wie wir diese Seite verbessern können? Lass es uns wissen! Konstruktives Feedback ist jederzeit willkommen.</p>
+            </div>
+        </div>
+    </main>
+
     <footer>
-        <p>&copy; 2026 [Dein Name]. Erstellt mit Hilfe von KI und gehostet auf GitHub Pages.</p>
+        <a href="#" class="tiktok-link">Folge uns auf TikTok @DeinTikTokName</a>
     </footer>
 
+    <script>
+        // Funktion für die Reiter (Akkordeons)
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var span = this.querySelector("span");
+                if (this.classList.contains("active")) {
+                    span.innerHTML = "-";
+                } else {
+                    span.innerHTML = "+";
+                }
+                
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        }
+
+        // Funktion für das Simulieren des Absendens
+        function submitQuestion() {
+            var textarea = document.getElementById("legalQuestion");
+            var successMsg = document.getElementById("successMessage");
+            var btn = document.querySelector(".submit-btn");
+
+            if(textarea.value.trim() !== "") {
+                btn.style.display = "none";
+                successMsg.style.display = "block";
+                textarea.disabled = true;
+            } else {
+                alert("Bitte gib zuerst eine Frage ein.");
+            }
+        }
+    </script>
 </body>
 </html>
