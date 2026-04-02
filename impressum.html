@@ -3,36 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impressum | Juris AI</title>
+    <title>Impressum | JuraCon</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&family=Montserrat:wght@200&display=swap" rel="stylesheet">
     <style>
-        body { background: #050505; color: #f5f5f5; font-family: 'Inter', sans-serif; padding: 60px 20px; line-height: 1.6; }
+        :root { --gold: #c5a059; --bg: #050505; --text: #888; }
+        body { background: var(--bg); color: #f5f5f5; font-family: 'Inter', sans-serif; padding: 60px 20px; line-height: 1.6; }
         main { max-width: 700px; margin: 0 auto; animation: fadeIn 1s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        h1 { font-family: 'Montserrat', sans-serif; color: #c5a059; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; font-size: 1.5rem; }
-        h2 { font-size: 1rem; color: #c5a059; margin-top: 30px; text-transform: uppercase; letter-spacing: 2px; }
-        p { font-weight: 200; color: #888; }
-        .back-link { display: inline-block; margin-bottom: 40px; color: #c5a059; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; }
+        h1 { font-family: 'Montserrat', sans-serif; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 40px; font-size: 1.5rem; }
+        h2 { font-size: 1rem; color: var(--gold); margin-top: 35px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        p { font-weight: 200; color: var(--text); margin-bottom: 5px; }
+        .back-link { display: inline-block; margin-bottom: 40px; color: var(--gold); text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .back-link:hover { border-bottom-color: var(--gold); }
     </style>
 </head>
 <body>
     <main>
-        <a href="index.html" class="back-link">< ZURÜCK</a>
+        <a href="index.html" class="back-link">< ZURÜCK ZUR STARTSEITE</a>
         <h1>Impressum</h1>
         
-        <h2>Angaben gemäß § 5 DDG / TMG</h2>
-        <p>[Dein Vorname Nachname]<br>
-        [Deine Straße Hausnummer]<br>
-        [PLZ Ort]</p>
+        <h2>Angaben gemäß § 5 DDG</h2>
+        <p>Heinrich Schreiber</p>
+        <p>Schlehenweg 6</p>
+        <p>33609 Bielefeld</p>
 
         <h2>Kontakt</h2>
-        <p>E-Mail: [Deine E-Mail-Adresse]</p>
+        <p>E-Mail: JuraConsultations@gmx.de</p>
 
         <h2>Redaktionell verantwortlich</h2>
-        <p>[Dein Vorname Nachname]<br>
-        [Anschrift wie oben]</p>
+        <p>Heinrich Schreiber</p>
+        <p>Schlehenweg 6</p>
+        <p>33609 Bielefeld</p>
 
-        <p style="margin-top: 50px; font-size: 0.7rem;">Dieses Impressum gilt für die Website https://[dein-nutzername].github.io</p>
+        <h2 style="margin-top: 50px; font-size: 0.8rem; opacity: 0.5;">Haftungsausschluss</h2>
+        <p style="font-size: 0.8rem; opacity: 0.5;">Die Inhalte dieser Seite dienen der unverbindlichen Information. Eine Rechtsberatung im Einzelfall findet nicht statt. Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links.</p>
     </main>
 </body>
 </html>
