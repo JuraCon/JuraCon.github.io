@@ -69,29 +69,35 @@
             color: var(--text-color);
         }
 
-        /* Eingabefeld */
+        /* Eingabefeld & Formular */
         .input-group {
             width: 100%;
             position: relative;
             margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        textarea {
+        input[type="email"], textarea {
             width: 100%;
             background-color: var(--dark-grey);
             border: 1px solid #333;
             color: white;
             padding: 20px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             border-radius: 8px;
-            resize: vertical;
-            min-height: 120px;
             font-family: 'Inter', sans-serif;
             box-sizing: border-box;
             transition: border-color 0.3s ease;
         }
 
-        textarea:focus {
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input[type="email"]:focus, textarea:focus {
             outline: none;
             border-color: var(--gold);
         }
@@ -106,7 +112,6 @@
             font-size: 1.1rem;
             font-weight: 600;
             border-radius: 8px;
-            margin-top: 10px;
             cursor: pointer;
             transition: opacity 0.3s ease;
         }
@@ -119,8 +124,11 @@
             display: none;
             color: var(--gold);
             text-align: center;
-            margin-top: 15px;
             font-weight: 600;
+            padding: 20px;
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            background-color: rgba(212, 175, 55, 0.1);
         }
 
         /* Dashboard Placeholder (Phase 1 Optik) */
@@ -147,6 +155,7 @@
             cursor: pointer;
             border-left: 2px solid transparent;
             transition: all 0.3s ease;
+            opacity: 0.7;
         }
 
         .request-item:hover {
@@ -228,11 +237,12 @@
     <main>
         <h1 class="title">Sag mir, welche juristische Frage dich interessiert!</h1>
 
-        <div class="input-group">
-            <textarea id="legalQuestion" placeholder="Beschreibe dein rechtliches Anliegen hier..."></textarea>
-            <button class="submit-btn" onclick="submitQuestion()">Anfrage senden</button>
+        <form id="juraForm" action="https://formspree.io/f/mbdpagwz" method="POST" class="input-group">
+            <input type="email" name="Email" id="userEmail" placeholder="Deine E-Mail-Adresse (für die Antwort)" required>
+            <textarea name="Anfrage" id="legalQuestion" placeholder="Beschreibe dein rechtliches Anliegen hier..." required></textarea>
+            <button type="submit" class="submit-btn" id="submitBtn">Anfrage senden</button>
             <div class="success-msg" id="successMessage">Dein Anliegen wurde übermittelt - du erhältst zeitnah eine Antwort.</div>
-        </div>
+        </form>
 
         <div class="dashboard-preview">
             <h3>Meine letzten Anfragen</h3>
@@ -265,17 +275,11 @@
     <script>
         // Funktion für die Reiter (Akkordeons)
         var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
+        for (var i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function() {
                 this.classList.toggle("active");
                 var span = this.querySelector("span");
-                if (this.classList.contains("active")) {
-                    span.innerHTML = "-";
-                } else {
-                    span.innerHTML = "+";
-                }
+                span.innerHTML = this.classList.contains("active") ? "-" : "+";
                 
                 var panel = this.nextElementSibling;
                 if (panel.style.maxHeight) {
@@ -286,20 +290,49 @@
             });
         }
 
-        // Funktion für das Simulieren des Absendens
-        function submitQuestion() {
-            var textarea = document.getElementById("legalQuestion");
-            var successMsg = document.getElementById("successMessage");
-            var btn = document.querySelector(".submit-btn");
+        // Formspree AJAX Submission (verhindert Weiterleitung)
+        var form = document.getElementById("juraForm");
+        var successMsg = document.getElementById("successMessage");
+        var btn = document.getElementById("submitBtn");
+        var userEmail = document.getElementById("userEmail");
+        var legalQuestion = document.getElementById("legalQuestion");
 
-            if(textarea.value.trim() !== "") {
-                btn.style.display = "none";
-                successMsg.style.display = "block";
-                textarea.disabled = true;
-            } else {
-                alert("Bitte gib zuerst eine Frage ein.");
-            }
+        async function handleSubmit(event) {
+            event.preventDefault();
+            btn.innerHTML = "Wird gesendet...";
+            btn.style.opacity = "0.7";
+            
+            var data = new FormData(event.target);
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    successMsg.style.display = "block";
+                    btn.style.display = "none";
+                    userEmail.style.display = "none";
+                    legalQuestion.style.display = "none";
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            alert(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            alert("Hoppla! Es gab ein Problem beim Senden deiner Anfrage.");
+                        }
+                    })
+                }
+            }).catch(error => {
+                alert("Hoppla! Es gab ein Problem beim Senden deiner Anfrage.");
+            }).finally(() => {
+                btn.innerHTML = "Anfrage senden";
+                btn.style.opacity = "1";
+            });
         }
+        form.addEventListener("submit", handleSubmit);
     </script>
 </body>
 </html>
