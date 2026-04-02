@@ -33,37 +33,33 @@
             flex-direction: column;
         }
 
-        /* --- Header & Navigation (Neu strukturiert für das Logo) --- */
+        /* Header & Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
             padding: 25px 50px;
             display: flex;
-            justify-content: space-between; /* Logo links, Button rechts */
+            justify-content: space-between;
             align-items: center;
             z-index: 100;
-            backdrop-filter: blur(5px); /* Subtiler Glas-Effekt */
+            backdrop-filter: blur(5px);
         }
 
-        /* Das neue Logo-Design */
         .logo {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 200; /* Sehr dünn = sehr edel */
+            font-weight: 200;
             font-size: 1.3rem;
-            letter-spacing: 5px; /* Weite Laufweite */
+            letter-spacing: 5px;
             text-transform: uppercase;
             color: var(--gold);
-            text-shadow: 0 0 10px var(--gold-glow); /* Subtiler Gold-Glow */
+            text-shadow: 0 0 10px var(--gold-glow);
             text-decoration: none;
             transition: 0.3s;
         }
 
-        .logo:hover {
-            letter-spacing: 7px; /* Dynamischer Effekt beim Drüberfahren */
-        }
+        .logo:hover { letter-spacing: 7px; }
 
-        /* Der Account Button rechts */
         .btn-outline {
             color: var(--gold);
             text-decoration: none;
@@ -82,12 +78,11 @@
         main {
             max-width: 800px;
             margin: 0 auto;
-            padding: 120px 20px 60px 20px; /* Mehr Platz oben wegen der fixierten Nav */
+            padding: 120px 20px 60px 20px;
             flex: 1;
             text-align: center;
         }
 
-        /* Große Überschrift */
         h1 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 200;
@@ -100,7 +95,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Formularbereich */
         .glass-card {
             background: var(--glass);
             border: 1px solid var(--border);
@@ -168,14 +162,15 @@
         .f-link { color: var(--dim); text-decoration: none; font-size: 10px; letter-spacing: 1px; margin: 0 15px; text-transform: uppercase; transition: 0.3s; }
         .f-link:hover { color: var(--gold); }
 
-        /* Erfolgsmeldung */
         .success { display: none; color: var(--gold); letter-spacing: 2px; padding: 20px; border: 1px solid var(--gold); margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">JuraCon</a> <a href="#" class="btn-outline">Account</a> </nav>
+        <a href="index.html" class="logo">JuraCon</a>
+        <a href="#" class="btn-outline">Account</a>
+    </nav>
 
     <main>
         <h1>Sag mir, welche juristische Frage dich interessiert</h1>
@@ -209,11 +204,10 @@
             <a href="impressum.html" class="f-link">Impressum</a>
             <a href="datenschutz.html" class="f-link">Datenschutz</a>
         </div>
-        <a href="#" class="f-link" style="color:var(--gold)">// FOLLOW ON TIKTOK</a>
+        <a href="https://www.tiktok.com/@juracon5" class="f-link" style="color:var(--gold)" target="_blank">// FOLLOW ON TIKTOK</a>
     </footer>
 
     <script>
-        // Funktion für die ausklappbaren Reiter
         function toggle(btn) {
             btn.classList.toggle("active");
             var panel = btn.nextElementSibling;
@@ -221,7 +215,6 @@
             btn.querySelector("span").innerHTML = panel.style.maxHeight ? "-" : "+";
         }
 
-        // Formspree AJAX Submission
         var f = document.getElementById("mainForm");
         f.onsubmit = async (e) => {
             e.preventDefault();
