@@ -8,138 +8,178 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* === GRUNDDESIGN (DARK MODE & GOLD) === */
+        /* === MODERNES PREMIUM-DESIGN (DARK MODE & GOLD) === */
+        :root {
+            --bg-color: #000000;
+            --surface-color: #111111;
+            --surface-hover: #1a1a1a;
+            --gold: #D4AF37;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+        }
+
         body {
-            background-color: #0a0a0a;
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, h4 { color: #D4AF37; margin-top: 0; }
-        p { color: #cccccc; }
-
+        h1, h2, h3 { color: var(--gold); font-weight: 600; margin-top: 0; }
+        
         .container {
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* === HEADER / HERO SECTION === */
+        /* === HEADER === */
         header {
             text-align: center;
-            padding: 60px 20px 40px;
-            border-bottom: 1px solid #222;
+            padding: 40px 0;
+            margin-bottom: 20px;
         }
         header h1 {
-            font-size: 3rem;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
         }
-        header p { font-size: 1.2rem; font-weight: 300; }
+        header p { 
+            font-size: 1.1rem; 
+            font-weight: 300; 
+            color: var(--text-muted); 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-        /* === KONTAKTFORMULAR (DEIN ANLIEGEN) === */
-        .form-section {
-            background-color: #121212;
-            border: 1px solid #333;
-            border-radius: 12px;
+        /* === ANONYMES FORMULAR === */
+        .anfrage-section {
+            background-color: var(--surface-color);
+            border-radius: 16px;
             padding: 40px;
-            margin: 40px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            border: 1px solid #222;
         }
+        
+        .anfrage-section p.anonym-hinweis {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .form-group { margin-bottom: 20px; }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #D4AF37;
-        }
-        .form-group input, .form-group textarea, .form-group select {
+        
+        .form-group select, 
+        .form-group textarea, 
+        .form-group input {
             width: 100%;
-            padding: 15px;
             background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            color: #fff;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            color: var(--text-main);
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
+            padding: 16px;
             box-sizing: border-box;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+        
+        .form-group select:focus, 
+        .form-group textarea:focus, 
+        .form-group input:focus {
             outline: none;
-            border-color: #D4AF37;
+            border-color: var(--gold);
+            background-color: #222;
         }
+
         .submit-btn {
             width: 100%;
-            background-color: #D4AF37;
-            color: #0a0a0a;
+            background-color: var(--gold);
+            color: #000;
             border: none;
-            padding: 18px;
+            padding: 16px;
             font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 8px;
+            font-weight: 700;
+            border-radius: 12px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
         .submit-btn:hover {
-            background-color: #e6c55a;
-            transform: translateY(-2px);
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
 
         /* === LETZTE ANFRAGEN === */
-        .case-box {
-            background-color: #1a1a1a;
-            border-left: 4px solid #D4AF37;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 0 8px 8px 0;
+        .letzte-anfragen-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
         }
+
+        .case-box {
+            background-color: var(--surface-color);
+            border-left: 3px solid var(--gold);
+            padding: 25px;
+            margin-bottom: 15px;
+            border-radius: 0 12px 12px 0;
+            transition: transform 0.2s ease;
+        }
+        .case-box:hover {
+            transform: translateX(5px);
+            background-color: var(--surface-hover);
+        }
+        .case-box h3 { margin-bottom: 8px; font-size: 1.1rem; color: #fff; }
+        .case-box p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
 
         /* === QUIZ START BUTTON === */
         .gold-black-btn {
-            background-color: #121212;
-            color: #D4AF37;
-            border: 2px solid #D4AF37;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 8px;
+            letter-spacing: 2px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
             display: block;
             margin: 60px auto 20px;
             width: 100%;
-            max-width: 400px;
         }
         .gold-black-btn:hover {
-            background-color: #D4AF37;
-            color: #121212;
-            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+            background-color: var(--gold);
+            color: #000;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
         }
 
-        /* === QUIZ CONTAINER === */
+        /* === QUIZ CONTAINER (Der Lernmodus) === */
         .quiz-container {
-            background-color: #121212;
-            border: 1px solid #333;
-            border-radius: 15px;
+            background-color: var(--surface-color);
+            border: 1px solid #222;
+            border-radius: 16px;
             padding: 40px;
             margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
         }
-        #question-text { font-size: 1.3rem; margin-bottom: 25px; color: #fff; line-height: 1.5; }
-        .btn-grid { display: flex; flex-direction: column; gap: 15px; }
+        #question-text { font-size: 1.25rem; margin-bottom: 30px; color: #fff; font-weight: 400; }
+        
+        .btn-grid { display: flex; flex-direction: column; gap: 12px; }
         .answer-btn {
-            background-color: transparent;
-            color: #ffffff;
-            border: 2px solid #555;
-            border-radius: 8px;
-            padding: 15px;
+            background-color: #1a1a1a;
+            color: #fff;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            padding: 18px;
             font-size: 1rem;
             text-align: left;
             cursor: pointer;
@@ -147,88 +187,91 @@
             font-family: 'Inter', sans-serif;
         }
         .answer-btn:hover:not([disabled]) {
-            border-color: #D4AF37;
-            background-color: rgba(212, 175, 55, 0.1);
+            border-color: var(--gold);
+            background-color: #222;
         }
         
-        /* Quiz Feedback Bereich (Erklärung) */
+        /* Quiz Feedback */
         #quiz-feedback {
             margin-top: 25px;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 25px;
+            border-radius: 10px;
             background-color: #1a1a1a;
-            border-left: 4px solid #D4AF37;
+            border-left: 3px solid var(--gold);
         }
-        #feedback-title { font-weight: bold; margin-bottom: 10px; font-size: 1.2rem; }
-        #feedback-text { font-size: 0.95rem; line-height: 1.5; color: #ddd; margin-bottom: 20px; }
+        #feedback-title { font-weight: 700; margin-bottom: 12px; font-size: 1.2rem; }
+        #feedback-text { font-size: 0.95rem; line-height: 1.6; color: #ccc; margin-bottom: 25px; }
         
         .next-btn {
-            background-color: #D4AF37;
-            color: #0a0a0a;
+            background-color: var(--gold);
+            color: #000;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 24px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
             float: right;
+            transition: background 0.2s;
         }
+        .next-btn:hover { background-color: #fff; }
 
         .hidden { display: none !important; }
         
-        /* Richtige/Falsche Antwort Farben */
-        .correct { background-color: #D4AF37 !important; color: #000 !important; border-color: #D4AF37 !important; font-weight: bold; }
-        .wrong { background-color: #3b1111 !important; border-color: #ff4444 !important; color: #fff !important; }
+        /* Antwort-Farben im Quiz */
+        .correct { background-color: var(--gold) !important; color: #000 !important; font-weight: 600; }
+        .wrong { background-color: #2a0a0a !important; border: 1px solid #ff4444 !important; color: #fff !important; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>JURACON</h1>
-        <p>Recht. Präzise. Verständlich.</p>
+        <p>Recht. Präzise. Anonym.</p>
     </header>
 
     <div class="container">
         
-        <section class="form-section">
-            <h2>Kostenlose Ersteinschätzung</h2>
-            <p style="margin-bottom: 30px;">Schildere uns deinen Fall. Wir prüfen dein Anliegen unverbindlich.</p>
+        <section class="anfrage-section">
+            <h2 style="margin-bottom: 10px;">Kostenlose Ersteinschätzung</h2>
+            <p class="anonym-hinweis">
+                🔒 Ein Name ist nicht erforderlich. Deine Anfrage wird 100% anonym behandelt.
+            </p>
             
             <form action="#" method="POST">
                 <div class="form-group">
-                    <label for="name">Dein Name</label>
-                    <input type="text" id="name" name="name" placeholder="Max Mustermann" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Deine E-Mail-Adresse</label>
-                    <input type="email" id="email" name="email" placeholder="max@beispiel.de" required>
-                </div>
-                <div class="form-group">
-                    <label for="thema">Kategorie deines Anliegens</label>
-                    <select id="thema" name="thema">
+                    <select id="thema" name="thema" required>
+                        <option value="" disabled selected>Kategorie wählen...</option>
                         <option value="arbeitsrecht">Arbeitsrecht (Überstunden, Kündigung...)</option>
-                        <option value="mietrecht">Mietrecht (Auszug, Kaution...)</option>
-                        <option value="vertragsrecht">Vertragsrecht (Fitnessstudio, Abos...)</option>
-                        <option value="sonstiges">Sonstiges</option>
+                        <option value="mietrecht">Mietrecht (Auszug, Kaution, Mängel...)</option>
+                        <option value="vertragsrecht">Vertragsrecht (Abos, Gym, Käufe...)</option>
+                        <option value="sonstiges">Sonstiges juristisches Problem</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
-                    <label for="fall">Schildere kurz deinen Fall</label>
-                    <textarea id="fall" name="fall" rows="4" placeholder="Worum geht es genau? Wann hast du den Vertrag geschlossen?" required></textarea>
+                    <textarea id="fall" name="fall" rows="5" placeholder="Schildere hier deinen Fall kurz und prägnant..." required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Fall unverbindlich einreichen</button>
+
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="E-Mail-Adresse für unsere Antwort" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Fall anonym einreichen</button>
             </form>
         </section>
 
         <section>
-            <h2>Aktuelle Erfolge</h2>
+            <h2 class="letzte-anfragen-title">Aktuelle Fälle</h2>
+            
             <div class="case-box">
-                <h3 style="margin-bottom: 5px;">Gym-Vertrag Kündigung</h3>
-                <p style="margin: 0;">Überprüfung der automatischen Vertragsverlängerung nach dem 01.03.2022. Erfolgreich monatlich gekündigt.</p>
+                <h3>Gym-Vertrag Kündigung</h3>
+                <p>Überprüfung der automatischen Vertragsverlängerung. Erfolgreich abgewehrt (Vertragsschluss nach 01.03.2022).</p>
             </div>
+            
             <div class="case-box">
-                <h3 style="margin-bottom: 5px;">Pauschale Überstundenabgeltung</h3>
-                <p style="margin: 0;">Prüfung des Arbeitsvertrags auf Verstoß gegen das Transparenzgebot § 307 BGB. Nachforderung läuft.</p>
+                <h3>Pauschale Überstundenabgeltung</h3>
+                <p>Prüfung des Arbeitsvertrags auf Verstoß gegen das Transparenzgebot. Nachforderung für Mandanten läuft.</p>
             </div>
         </section>
 
@@ -236,27 +279,27 @@
 
         <div id="quiz-app" class="quiz-container hidden">
             <div id="quiz-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 25px;">
-                <h2 style="margin: 0;">BGB-Quiz</h2>
-                <p id="question-progress" style="margin: 0; color: #888; font-weight: bold;">1 / 10</p>
+                <h3 style="margin: 0; color: #fff;">BGB-Quiz</h3>
+                <p id="question-progress" style="margin: 0; color: var(--gold); font-weight: 600;">1 / 10</p>
             </div>
             
             <div id="quiz-body">
-                <h3 id="question-text">Lade Frage...</h3>
+                <h2 id="question-text">Lade Frage...</h2>
                 <div id="answer-buttons" class="btn-grid">
                     </div>
 
                 <div id="quiz-feedback" class="hidden">
                     <div id="feedback-title">Richtig!</div>
-                    <div id="feedback-text">Hier steht die juristische Erklärung...</div>
+                    <div id="feedback-text">Erklärungstext...</div>
                     <button id="next-btn" class="next-btn">Nächste Frage ➔</button>
                     <div style="clear: both;"></div>
                 </div>
             </div>
 
             <div id="quiz-result" class="hidden" style="text-align: center;">
-                <h2 style="font-size: 2.5rem;">Quiz Beendet!</h2>
-                <p style="font-size: 1.5rem;">Dein Score: <strong class="gold-text"><span id="score-text"></span> / 10</strong></p>
-                <p id="result-message" style="margin: 30px 0; font-size: 1.1rem;"></p>
+                <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Quiz Beendet!</h2>
+                <p style="font-size: 1.2rem; color: #ccc;">Dein Score: <strong style="color: var(--gold); font-size: 1.5rem;"><span id="score-text"></span> / 10</strong></p>
+                <p id="result-message" style="margin: 30px 0; font-size: 1.1rem; color: #fff;"></p>
                 <button id="restart-btn" class="gold-black-btn" style="margin-top: 0;">Quiz wiederholen</button>
             </div>
         </div>
@@ -264,24 +307,23 @@
     </div>
 
     <script>
-        // Fragenkatalog inkl. ausführlicher juristischer Begründung (Rationale)
         const questions = [
             {
                 question: "Ab wann beginnt die Rechtsfähigkeit des Menschen laut BGB?",
                 answers: [
                     { text: "Mit der Volljährigkeit", correct: false, rationale: "Falsch. Die Volljährigkeit markiert den Eintritt der unbeschränkten Geschäftsfähigkeit, nicht der Rechtsfähigkeit." },
                     { text: "Mit der Vollendung der Geburt", correct: true, rationale: "Korrekt! Gemäß § 1 BGB beginnt die Rechtsfähigkeit des Menschen mit der Vollendung der Geburt." },
-                    { text: "Mit der Zeugung", correct: false, rationale: "Falsch. Der Nasciturus (die ungeborene Leibesfrucht) hat zwar gewisse Rechte (z.B. Erbfähigkeit), ist aber noch nicht voll rechtsfähig." },
-                    { text: "Mit dem 7. Lebensjahr", correct: false, rationale: "Falsch. Mit Vollendung des 7. Lebensjahres beginnt die beschränkte Geschäftsfähigkeit." }
+                    { text: "Mit der Zeugung", correct: false, rationale: "Falsch. Der Nasciturus (die ungeborene Leibesfrucht) hat zwar gewisse Rechte, ist aber noch nicht voll rechtsfähig." },
+                    { text: "Mit dem 7. Lebensjahr", correct: false, rationale: "Falsch. Mit Vollendung des 7. Lebensjahres beginnt lediglich die beschränkte Geschäftsfähigkeit." }
                 ]
             },
             {
                 question: "Was besagt das Abstraktionsprinzip im deutschen Zivilrecht?",
                 answers: [
                     { text: "Verträge können auch mündlich geschlossen werden.", correct: false, rationale: "Falsch. Das beschreibt die Formfreiheit." },
-                    { text: "Verpflichtungs- und Verfügungsgeschäft sind rechtlich voneinander unabhängig.", correct: true, rationale: "Richtig! Das Abstraktionsprinzip trennt streng zwischen dem schuldrechtlichen Verpflichtungsgeschäft (z.B. Kaufvertrag) und dem dinglichen Verfügungsgeschäft (z.B. Übereignung)." },
+                    { text: "Verpflichtungs- und Verfügungsgeschäft sind rechtlich voneinander unabhängig.", correct: true, rationale: "Richtig! Das Abstraktionsprinzip trennt streng zwischen dem schuldrechtlichen Verpflichtungsgeschäft (Kauf) und dem dinglichen Verfügungsgeschäft (Übereignung)." },
                     { text: "Jedes rechtliche Geschäft muss schriftlich fixiert werden.", correct: false, rationale: "Falsch. Das widerspricht dem Grundsatz der Formfreiheit im BGB." },
-                    { text: "Der Eigentümer hat immer auch den Besitz.", correct: false, rationale: "Falsch. Eigentum (Recht) und Besitz (Tatsache) können auseinanderfallen (z.B. bei der Miete)." }
+                    { text: "Der Eigentümer hat immer auch den Besitz.", correct: false, rationale: "Falsch. Eigentum (Recht) und Besitz (Tatsache) können auseinanderfallen (z.B. Miete)." }
                 ]
             },
             {
@@ -289,8 +331,8 @@
                 answers: [
                     { text: "Das Geschäft wird ab dem Zeitpunkt der Erklärung unwirksam (ex nunc).", correct: false, rationale: "Falsch. Das gilt z.B. für eine Kündigung, nicht für die Anfechtung." },
                     { text: "Das Rechtsgeschäft bleibt wirksam, es gibt aber Schadensersatz.", correct: false, rationale: "Falsch. Die primäre Folge der Anfechtung ist die Nichtigkeit." },
-                    { text: "Das Rechtsgeschäft ist als von Anfang an nichtig anzusehen (ex tunc).", correct: true, rationale: "Exakt! Gemäß § 142 Abs. 1 BGB wirkt die Anfechtung ex tunc, also rückwirkend." },
-                    { text: "Der Vertragspartner darf wählen, ob er am Vertrag festhält.", correct: false, rationale: "Falsch. Die Anfechtung vernichtet die Erklärung automatisch." }
+                    { text: "Das Rechtsgeschäft ist als von Anfang an nichtig anzusehen (ex tunc).", correct: true, rationale: "Exakt! Gemäß § 142 Abs. 1 BGB wirkt die Anfechtung ex tunc, also rückwirkend auf den Zeitpunkt des Vertragsschlusses." },
+                    { text: "Der Vertragspartner darf wählen, ob er am Vertrag festhält.", correct: false, rationale: "Falsch. Die Anfechtung vernichtet die Erklärung automatisch für beide Seiten." }
                 ]
             },
             {
@@ -307,7 +349,7 @@
                 answers: [
                     { text: "Die rechtliche Zuordnung einer Sache.", correct: false, rationale: "Falsch. Das beschreibt das Eigentum (§ 903 BGB)." },
                     { text: "Die Eintragung im Grundbuch.", correct: false, rationale: "Falsch. Dies ist nur für dingliche Rechte an Grundstücken relevant." },
-                    { text: "Die tatsächliche Sachherrschaft über eine Sache.", correct: true, rationale: "Korrekt! Nach § 854 Abs. 1 BGB wird der Besitz durch die Erlangung der tatsächlichen Gewalt über die Sache erworben." },
+                    { text: "Die tatsächliche Sachherrschaft über eine Sache.", correct: true, rationale: "Korrekt! Nach § 854 Abs. 1 BGB wird der Besitz rein durch die Erlangung der tatsächlichen Gewalt über die Sache erworben." },
                     { text: "Das Recht, eine Sache zerstören zu dürfen.", correct: false, rationale: "Falsch. Das darf in der Regel nur der Eigentümer." }
                 ]
             },
@@ -316,14 +358,14 @@
                 answers: [
                     { text: "Ja, von Anfang an voll wirksam.", correct: false, rationale: "Falsch. Es fehlt noch ein wichtiges Detail aus § 110 BGB." },
                     { text: "Nein, der Vertrag ist nichtig.", correct: false, rationale: "Falsch. Er ist maximal schwebend unwirksam, nicht sofort nichtig." },
-                    { text: "Ja, aber erst wenn er es vollständig mit dem Taschengeld bezahlt (bewirkt) hat.", correct: true, rationale: "Richtig! § 110 BGB (Taschengeldparagraph) verlangt das 'Bewirken' der Leistung. Bei Ratenzahlung bleibt der Vertrag vorerst schwebend unwirksam." },
+                    { text: "Ja, aber erst wenn er es vollständig bezahlt (bewirkt) hat.", correct: true, rationale: "Richtig! § 110 BGB (Taschengeldparagraph) verlangt das 'Bewirken' der Leistung. Bei Ratenzahlung bleibt der Vertrag vorerst schwebend unwirksam." },
                     { text: "Nur wenn das Spiel ab 16 freigegeben ist.", correct: false, rationale: "Falsch. Das ist Jugendschutzrecht, hat aber nichts mit der BGB-Vertragswirksamkeit zu tun." }
                 ]
             },
             {
                 question: "Welches Recht hat der Käufer bei einem Sachmangel primär?",
                 answers: [
-                    { text: "Rücktritt vom Kaufvertrag", correct: false, rationale: "Falsch. Dies ist ein sekundäres Recht nach Fristsetzung." },
+                    { text: "Rücktritt vom Kaufvertrag", correct: false, rationale: "Falsch. Dies ist ein sekundäres Recht nach erfolgloser Fristsetzung." },
                     { text: "Minderung des Kaufpreises", correct: false, rationale: "Falsch. Auch hier muss dem Verkäufer meist erst eine Frist gesetzt werden." },
                     { text: "Schadensersatz", correct: false, rationale: "Falsch. Schadensersatz ist sekundär und erfordert Verschulden." },
                     { text: "Anspruch auf Nacherfüllung", correct: true, rationale: "Korrekt! Nach § 439 BGB hat der Käufer zunächst das Recht auf Nacherfüllung (Reparatur oder Neulieferung). Der Verkäufer hat das 'Recht zur zweiten Andienung'." }
@@ -332,17 +374,17 @@
             {
                 question: "Welche Form ist für einen Grundstückskaufvertrag gesetzlich zwingend?",
                 answers: [
-                    { text: "Notarielle Beurkundung", correct: true, rationale: "Richtig! Nach § 311b Abs. 1 BGB bedarf ein Vertrag, durch den sich jemand verpflichtet, Eigentum an einem Grundstück zu übertragen, der notariellen Beurkundung." },
+                    { text: "Notarielle Beurkundung", correct: true, rationale: "Richtig! Nach § 311b Abs. 1 BGB bedarf ein Vertrag über ein Grundstück zwingend der notariellen Beurkundung." },
                     { text: "Einfache Schriftform", correct: false, rationale: "Falsch. Die bloße Unterschrift reicht hier aufgrund der hohen Werte und Warnfunktion nicht." },
-                    { text: "Textform (z.B. E-Mail)", correct: false, rationale: "Falsch. Eine E-Mail ist formnichtig." },
-                    { text: "Mündliche Vereinbarung mit Zeugen", correct: false, rationale: "Falsch. Absolut formnichtig." }
+                    { text: "Textform (z.B. E-Mail)", correct: false, rationale: "Falsch. Eine E-Mail ist hier formnichtig." },
+                    { text: "Mündliche Vereinbarung", correct: false, rationale: "Falsch. Absolut formnichtig." }
                 ]
             },
             {
                 question: "Was versteht man unter 'culpa in contrahendo' (c.i.c.)?",
                 answers: [
                     { text: "Einen unwirksamen Vertrag aufgrund eines Inhaltsirrtums.", correct: false, rationale: "Falsch. Das ist ein Anfechtungsgrund." },
-                    { text: "Das Verschulden bei Vertragsanbahnung bzw. Vertragsschluss.", correct: true, rationale: "Richtig! Die c.i.c. (§ 311 Abs. 2 BGB) begründet vorvertragliche Schutzpflichten. Beispiel: Ausrutschen auf der Bananenschale im Supermarkt vor dem Kauf." },
+                    { text: "Das Verschulden bei Vertragsanbahnung bzw. Vertragsschluss.", correct: true, rationale: "Richtig! Die c.i.c. (§ 311 Abs. 2 BGB) begründet vorvertragliche Schutzpflichten. Klassisches Beispiel: Ausrutschen auf der Bananenschale im Supermarkt vor dem Kauf." },
                     { text: "Die nachträgliche Unmöglichkeit der Leistung.", correct: false, rationale: "Falsch. Das regelt § 275 BGB." },
                     { text: "Die Pflicht zur Gegenleistung bei zufälligem Untergang.", correct: false, rationale: "Falsch. Das betrifft die Preisgefahr (§ 326 BGB)." }
                 ]
@@ -352,13 +394,12 @@
                 answers: [
                     { text: "Jeder, der gesetzlich helfen muss.", correct: false, rationale: "Falsch. Das ist eine strafrechtliche Frage (unterlassene Hilfeleistung)." },
                     { text: "Ein gerichtlich bestellter Betreuer.", correct: false, rationale: "Falsch. Das ist ein gesetzlicher Vertreter." },
-                    { text: "Derjenige, dessen sich der Schuldner zur Erfüllung seiner Verbindlichkeit bedient.", correct: true, rationale: "Exakt! Gemäß § 278 BGB haftet der Schuldner für das Verschulden seiner Erfüllungsgehilfen (z.B. der Handwerker für seinen Angestellten) wie für eigenes Verschulden." },
+                    { text: "Derjenige, dessen sich der Schuldner zur Erfüllung seiner Verbindlichkeit bedient.", correct: true, rationale: "Exakt! Gemäß § 278 BGB haftet der Schuldner für das Verschulden seiner Erfüllungsgehilfen (z.B. Handwerker für seinen Gesellen) wie für eigenes Verschulden." },
                     { text: "Jemand, der ohne Auftrag ein Geschäft führt.", correct: false, rationale: "Falsch. Das ist die Geschäftsführung ohne Auftrag (GoA)." }
                 ]
             }
         ];
 
-        // HTML Elemente
         const openQuizBtn = document.getElementById("open-quiz-btn");
         const quizApp = document.getElementById("quiz-app");
         const questionElement = document.getElementById("question-text");
@@ -368,7 +409,6 @@
         const quizResult = document.getElementById("quiz-result");
         const scoreText = document.getElementById("score-text");
         
-        // Feedback Elemente
         const feedbackBox = document.getElementById("quiz-feedback");
         const feedbackTitle = document.getElementById("feedback-title");
         const feedbackText = document.getElementById("feedback-text");
@@ -377,7 +417,6 @@
         let currentQuestionIndex = 0;
         let score = 0;
 
-        // Button um Quiz zu öffnen
         openQuizBtn.addEventListener("click", () => {
             quizApp.classList.remove("hidden");
             openQuizBtn.style.display = "none";
@@ -385,7 +424,6 @@
             setTimeout(() => quizApp.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
         });
 
-        // Quiz initiieren
         function startQuiz() {
             currentQuestionIndex = 0;
             score = 0;
@@ -394,11 +432,10 @@
             showQuestion();
         }
 
-        // Frage anzeigen
         function showQuestion() {
             resetState();
             let currentQuestion = questions[currentQuestionIndex];
-            progressElement.innerText = `Frage ${currentQuestionIndex + 1} / ${questions.length}`;
+            progressElement.innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
             questionElement.innerText = currentQuestion.question;
 
             currentQuestion.answers.forEach(answer => {
@@ -406,13 +443,12 @@
                 button.innerText = answer.text;
                 button.classList.add("answer-btn");
                 button.dataset.correct = answer.correct;
-                button.dataset.rationale = answer.rationale; // Erklärung im Button speichern
+                button.dataset.rationale = answer.rationale;
                 button.addEventListener("click", selectAnswer);
                 answerButtonsElement.appendChild(button);
             });
         }
 
-        // Layout zurücksetzen für neue Frage
         function resetState() {
             feedbackBox.classList.add("hidden");
             while (answerButtonsElement.firstChild) {
@@ -420,38 +456,32 @@
             }
         }
 
-        // Antwort auswählen (Lern-Modus)
         function selectAnswer(e) {
             const selectedButton = e.target;
             const isCorrect = selectedButton.dataset.correct === "true";
             const rationale = selectedButton.dataset.rationale;
             
-            // Alle Buttons deaktivieren, damit man nicht mehrmals klickt
             Array.from(answerButtonsElement.children).forEach(button => {
                 button.disabled = true;
-                // Zeige sofort die richtige Antwort an (auch wenn man falsch geklickt hat)
                 if(button.dataset.correct === "true"){
                     button.classList.add("correct");
                 }
             });
 
-            // Styling für geklickten Button
             if (isCorrect) {
                 score++;
-                feedbackTitle.innerText = "Richtig! ✅";
+                feedbackTitle.innerText = "Korrekt! ✅";
                 feedbackTitle.style.color = "#D4AF37";
             } else {
                 selectedButton.classList.add("wrong");
-                feedbackTitle.innerText = "Falsch! ❌";
+                feedbackTitle.innerText = "Leider falsch! ❌";
                 feedbackTitle.style.color = "#ff4444";
             }
 
-            // Erklärung anzeigen
             feedbackText.innerText = rationale;
             feedbackBox.classList.remove("hidden");
         }
 
-        // Klick auf "Nächste Frage"
         nextBtn.addEventListener("click", () => {
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.length) {
@@ -461,7 +491,6 @@
             }
         });
 
-        // Endergebnis anzeigen
         function showScore() {
             quizBody.classList.add("hidden");
             quizResult.classList.remove("hidden");
@@ -469,9 +498,9 @@
             
             const resultMsg = document.getElementById("result-message");
             if (score >= 9) {
-                resultMsg.innerText = "Prädikatsexamen incoming! Starkes Wissen. 🎓";
+                resultMsg.innerText = "Hervorragend! Prädikatsexamen incoming. 🎓";
             } else if (score >= 6) {
-                resultMsg.innerText = "Solides Grundwissen, aber da geht noch was! 📚";
+                resultMsg.innerText = "Gutes Grundwissen, aber da ist noch Luft nach oben! 📚";
             } else {
                 resultMsg.innerText = "Zeit, den Palandt wieder aufzuschlagen... 📖";
             }
