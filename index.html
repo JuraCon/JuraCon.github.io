@@ -147,113 +147,65 @@
 
         .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px var(--gold); }
 
-        /* NEU: Quiz Styles */
-        .quiz-start-wrapper {
-            margin-top: 50px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
+        /* Quiz Styles */
+        .quiz-start-wrapper { margin-top: 50px; margin-bottom: 40px; text-align: center; }
         .quiz-start-btn {
-            background: transparent;
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 15px 35px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 0 15px var(--gold-glow);
-            border-radius: 4px;
+            background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 15px 35px;
+            font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 3px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.4s ease;
+            box-shadow: 0 0 15px var(--gold-glow); border-radius: 4px;
         }
-
-        .quiz-start-btn:hover {
-            background: var(--gold);
-            color: #000;
-            box-shadow: 0 0 25px var(--gold-glow);
-            transform: translateY(-2px);
-        }
+        .quiz-start-btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 25px var(--gold-glow); transform: translateY(-2px); }
 
         .hidden { display: none !important; }
 
         .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-            margin-bottom: 25px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 25px;
         }
+        .quiz-header h3 { font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
 
-        .quiz-header h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            letter-spacing: 3px;
-            color: var(--gold);
-            text-transform: uppercase;
-        }
-
-        #question-progress { color: var(--dim); font-size: 12px; letter-spacing: 1px; }
-
-        #question-text {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            text-align: left;
-        }
-
+        #question-text { font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6; text-align: left; }
         .btn-grid { display: flex; flex-direction: column; gap: 12px; }
 
         .answer-btn {
-            background: transparent;
-            color: #fff;
-            border: 1px solid var(--border);
-            padding: 15px 20px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
-            border-radius: 4px;
+            background: transparent; color: #fff; border: 1px solid var(--border); padding: 15px 20px;
+            font-family: 'Inter', sans-serif; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease;
+            text-align: left; border-radius: 4px;
         }
+        .answer-btn:hover { border-color: var(--gold); background: var(--glass); }
+        .answer-btn.correct { border-color: #4caf50; color: #4caf50; background: rgba(76, 175, 80, 0.05); }
+        .answer-btn.wrong { border-color: #f44336; color: #f44336; background: rgba(244, 67, 54, 0.05); }
 
-        .answer-btn:hover {
-            border-color: var(--gold);
-            background: var(--glass);
+        /* NEU: Erklärungs-Box Styles */
+        .explanation-box {
+            margin-top: 25px; padding: 20px; border-left: 2px solid var(--gold);
+            background: rgba(255, 255, 255, 0.02); text-align: left; font-size: 0.9rem;
+            color: var(--dim); line-height: 1.5; animation: slideDown 0.4s ease-out;
         }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .answer-btn.correct {
-            border-color: #4caf50;
-            color: #4caf50;
-            background: rgba(76, 175, 80, 0.05);
+        .next-btn {
+            margin-top: 25px; width: 100%; background: var(--gold); color: #000;
+            border: none; padding: 12px; letter-spacing: 2px; text-transform: uppercase;
+            font-weight: bold; cursor: pointer; border-radius: 4px; transition: 0.3s;
         }
-
-        .answer-btn.wrong {
-            border-color: #f44336;
-            color: #f44336;
-            background: rgba(244, 67, 54, 0.05);
-        }
+        .next-btn:hover { box-shadow: 0 0 15px var(--gold-glow); transform: scale(1.01); }
 
         .fade-in { animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
 
-        /* Footer Accordions */
+        /* Accordion Styles */
         .acc-btn {
             width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
             color: var(--dim); padding: 20px 0; text-align: left; cursor: pointer;
-            text-transform: uppercase; font-size: 10px; letter-spacing: 1px;
-            display: flex; justify-content: space-between;
+            text-transform: uppercase; font-size: 10px; letter-spacing: 1px; display: flex; justify-content: space-between;
         }
-
         .panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; color: #666; font-size: 13px; line-height: 1.6; text-align: left; }
 
-        /* Footer */
         footer { padding: 50px 20px; text-align: center; border-top: 1px solid var(--border); margin-top: auto; }
         .f-link { color: var(--dim); text-decoration: none; font-size: 10px; letter-spacing: 1px; margin: 0 15px; text-transform: uppercase; transition: 0.3s; }
         .f-link:hover { color: var(--gold); }
-
         .success { display: none; color: var(--gold); letter-spacing: 2px; padding: 20px; border: 1px solid var(--gold); margin-top: 20px; }
     </style>
 </head>
@@ -294,8 +246,12 @@
             
             <div id="quiz-body" class="fade-in">
                 <p id="question-text">Lade Frage...</p>
-                <div id="answer-buttons" class="btn-grid">
-                    </div>
+                <div id="answer-buttons" class="btn-grid"></div>
+                <div id="explanation-container" class="explanation-box hidden">
+                    <strong style="color: var(--gold);">Hintergrund:</strong><br>
+                    <span id="explanation-text"></span>
+                    <button id="next-btn" class="next-btn">NÄCHSTE FRAGE</button>
+                </div>
             </div>
 
             <div id="quiz-result" class="hidden fade-in" style="text-align: center;">
@@ -305,88 +261,39 @@
                 <button id="restart-btn" class="submit-btn" style="border-color: var(--gold); color: var(--gold);">QUIZ NEU STARTEN</button>
             </div>
         </div>
+
         <div style="margin-top: 60px;">
             <button class="acc-btn" onclick="toggle(this)">Disclaimer <span>+</span></button>
             <div class="panel">
-                <p style="padding: 20px 0;">
-                    JuraCon hat es sich zur Aufgabe gemacht, rechtliche Fragestellungen für jeden zugänglich zu machen – unabhängig davon, ob es sich um akademische Themen im Rahmen des Studiums oder um reale juristische Alltagsherausforderungen handelt.<br><br>
-                    Unsere Ersteinschätzungen werden <strong>nicht automatisiert generiert</strong>, sondern persönlich und individuell verfasst, mit höchstem Anspruch an Präzision und Verständlichkeit.<br><br>
-                    Wir bitten jedoch um Verständnis, dass keine rechtliche Verpflichtung zur Beantwortung von Anfragen besteht. Ebenso übernehmen wir keine Gewähr für die Richtigkeit, Vollständigkeit oder Aktualität der bereitgestellten Informationen. Dies ersetzt in keinem Fall eine professionelle anwaltliche Beratung. Ein Mandatsverhältnis kommt durch die Nutzung dieses Dienstes nicht zustande.
-                </p>
-            </div>
-
-            <button class="acc-btn" onclick="toggle(this)">Vorschläge & Feedback <span>+</span></button>
-            <div class="panel">
-                <div style="padding: 20px 0;">
-                    <p style="margin-bottom: 15px;">Wir optimieren JuraCon stetig. Sende uns deine Vorschläge oder Feedback zur User Experience:</p>
-                    <form id="feedbackForm" action="https://formspree.io/f/mbdpagwz" method="POST">
-                        <input type="hidden" name="Kategorie" value="Neues Feedback / Vorschlag">
-                        <textarea name="Feedback" placeholder="DEINE VORSCHLÄGE..." rows="2" required style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); color: #fff; padding: 10px 0; margin-bottom: 20px; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; resize: none;"></textarea>
-                        <button type="submit" class="submit-btn" id="fBtn" style="padding: 12px; font-size: 10px; border-color: var(--dim); color: var(--dim);">FEEDBACK SENDEN</button>
-                    </form>
-                    <div id="fMsg" class="success" style="padding: 15px; font-size: 10px;">DANKE FÜR DEIN FEEDBACK.</div>
-                </div>
+                <p style="padding: 20px 0;">JuraCon bietet persönliche Ersteinschätzungen ohne Gewähr. Dies ersetzt keine anwaltliche Beratung.</p>
             </div>
         </div>
     </main>
 
     <footer>
-        <div style="margin-bottom: 20px;">
-            <a href="impressum.html" class="f-link">Impressum</a>
-            <a href="datenschutz.html" class="f-link">Datenschutz</a>
-        </div>
+        <a href="impressum.html" class="f-link">Impressum</a>
+        <a href="datenschutz.html" class="f-link">Datenschutz</a>
         <a href="https://www.tiktok.com/@juracon5" class="f-link" style="color:var(--gold)" target="_blank">// FOLLOW ON TIKTOK</a>
     </footer>
 
     <script>
-        /* Accordion & Forms JS (Original) */
-        function toggle(btn) {
-            btn.classList.toggle("active");
-            var panel = btn.nextElementSibling;
-            if (panel.style.maxHeight) { panel.style.maxHeight = null; } 
-            else { panel.style.maxHeight = panel.scrollHeight + "px"; }
-            btn.querySelector("span").innerHTML = panel.style.maxHeight ? "-" : "+";
-        }
-
-        var f = document.getElementById("mainForm");
-        f.onsubmit = async (e) => {
-            e.preventDefault();
-            var b = document.getElementById("sBtn");
-            b.innerHTML = "SENDING...";
-            fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' }})
-            .then(r => { if(r.ok) { f.style.display="none"; document.getElementById("msg").style.display="block"; } });
-        };
-
-        var ff = document.getElementById("feedbackForm");
-        ff.onsubmit = async (e) => {
-            e.preventDefault();
-            var fb = document.getElementById("fBtn");
-            fb.innerHTML = "SENDING...";
-            fetch(ff.action, { method: 'POST', body: new FormData(ff), headers: { 'Accept': 'application/json' }})
-            .then(r => { 
-                if(r.ok) { 
-                    ff.style.display="none"; 
-                    document.getElementById("fMsg").style.display="block"; 
-                    var panel = ff.closest('.panel');
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
-            });
-        };
-
-        /* NEU: Quiz JS Logic */
+        /* Quiz-Daten mit Erklärungen */
         const questions = [
-            { question: "Ab wann beginnt die Rechtsfähigkeit des Menschen laut BGB?", answers: [ { text: "Mit der Volljährigkeit", correct: false }, { text: "Mit der Vollendung der Geburt", correct: true }, { text: "Mit der Zeugung", correct: false }, { text: "Mit dem 7. Lebensjahr", correct: false } ] },
-            { question: "Was besagt das Abstraktionsprinzip im deutschen Zivilrecht?", answers: [ { text: "Verträge können auch mündlich geschlossen werden.", correct: false }, { text: "Verpflichtungs- und Verfügungsgeschäft sind rechtlich voneinander unabhängig.", correct: true }, { text: "Jedes rechtliche Geschäft muss schriftlich fixiert werden.", correct: false }, { text: "Der Eigentümer hat immer auch den Besitz an der Sache.", correct: false } ] },
-            { question: "Welche Rechtsfolge tritt nach der erfolgreichen Anfechtung einer Willenserklärung ein?", answers: [ { text: "Das Rechtsgeschäft ist als von Anfang an nichtig anzusehen.", correct: true }, { text: "Das Rechtsgeschäft wird ab dem Zeitpunkt der Anfechtung unwirksam.", correct: false }, { text: "Das Rechtsgeschäft bleibt wirksam, aber es muss Schadensersatz geleistet werden.", correct: false }, { text: "Der Vertragspartner kann entscheiden, ob er festhalten möchte.", correct: false } ] },
-            { question: "Wann tritt die regelmäßige Verjährung im BGB ein?", answers: [ { text: "Nach 10 Jahren", correct: false }, { text: "Nach 30 Jahren", correct: false }, { text: "Nach 3 Jahren", correct: true }, { text: "Nach 1 Jahr", correct: false } ] },
-            { question: "Was kennzeichnet den 'Besitz' im rechtlichen Sinne?", answers: [ { text: "Die vollständige rechtliche Zuordnung einer Sache.", correct: false }, { text: "Die Eintragung im Grundbuch.", correct: false }, { text: "Das Recht, eine Sache zerstören zu dürfen.", correct: false }, { text: "Die tatsächliche Sachherrschaft über eine Sache.", correct: true } ] },
-            { question: "Ein 16-Jähriger kauft ein Videospiel von seinem Taschengeld. Ist der Vertrag wirksam?", answers: [ { text: "Ja, der Vertrag ist von Anfang an voll wirksam.", correct: false }, { text: "Ja, aber erst sobald er vollständig mit dem Taschengeld bezahlt hat.", correct: true }, { text: "Nein, der Vertrag ist nichtig.", correct: false }, { text: "Nur mit vorheriger Zustimmung der Eltern.", correct: false } ] },
-            { question: "Welches Recht hat der Käufer bei einem Sachmangel primär (zuerst)?", answers: [ { text: "Anspruch auf Nacherfüllung", correct: true }, { text: "Rücktritt vom Kaufvertrag", correct: false }, { text: "Minderung des Kaufpreises", correct: false }, { text: "Schadensersatz", correct: false } ] },
-            { question: "Welche Form ist für einen Grundstückskaufvertrag gesetzlich vorgeschrieben?", answers: [ { text: "Textform (z.B. E-Mail)", correct: false }, { text: "Mündliche Vereinbarung mit Zeugen", correct: false }, { text: "Notarielle Beurkundung", correct: true }, { text: "Einfache Schriftform", correct: false } ] },
-            { question: "Was versteht man unter 'culpa in contrahendo' (c.i.c.)?", answers: [ { text: "Das Verschulden bei Vertragsanbahnung.", correct: true }, { text: "Einen unwirksamen Vertrag aufgrund eines Inhaltsirrtums.", correct: false }, { text: "Die Pflicht zur Gegenleistung bei zufälligem Untergang.", correct: false }, { text: "Die nachträgliche Unmöglichkeit der Leistung.", correct: false } ] },
-            { question: "Wer ist laut BGB ein 'Erfüllungsgehilfe'?", answers: [ { text: "Jeder, der gesetzlich verpflichtet ist, zu helfen.", correct: false }, { text: "Derjenige, dessen sich der Schuldner zur Erfüllung bedient.", correct: true }, { text: "Eine Person, die ohne Auftrag ein Geschäft führt.", correct: false }, { text: "Ein gerichtlich bestellter Betreuer.", correct: false } ] }
+            { question: "Ab wann beginnt die Rechtsfähigkeit des Menschen laut BGB?", explanation: "Gemäß § 1 BGB beginnt die Rechtsfähigkeit mit der Vollendung der Geburt. Ab diesem Moment kann man Träger von Rechten und Pflichten sein.", answers: [ { text: "Mit der Volljährigkeit", correct: false }, { text: "Mit der Vollendung der Geburt", correct: true }, { text: "Mit der Zeugung", correct: false }, { text: "Mit dem 7. Lebensjahr", correct: false } ] },
+            { question: "Was besagt das Abstraktionsprinzip im deutschen Zivilrecht?", explanation: "Es trennt strikt zwischen dem Verpflichtungsgeschäft (Kaufvertrag) und dem Verfügungsgeschäft (Übereignung). Beide sind rechtlich unabhängig voneinander wirksam.", answers: [ { text: "Mündliche Verträge sind erlaubt.", correct: false }, { text: "Verpflichtungs- und Verfügungsgeschäft sind rechtlich unabhängig.", correct: true }, { text: "Alles muss schriftlich sein.", correct: false }, { text: "Eigentum ist gleich Besitz.", correct: false } ] },
+            { question: "Welche Rechtsfolge tritt nach der erfolgreichen Anfechtung ein?", explanation: "Nach § 142 Abs. 1 BGB gilt das Rechtsgeschäft als von Anfang an nichtig (Wirkung 'ex tunc').", answers: [ { text: "Nichtig von Anfang an.", correct: true }, { text: "Unwirksam ab jetzt.", correct: false }, { text: "Bleibt wirksam mit Schadensersatz.", correct: false }, { text: "Wahlrecht des Partners.", correct: false } ] },
+            { question: "Wann tritt die regelmäßige Verjährung im BGB ein?", explanation: "Die regelmäßige Verjährungsfrist beträgt nach § 195 BGB drei Jahre und beginnt meist mit dem Ende des Jahres, in dem der Anspruch entstand.", answers: [ { text: "Nach 10 Jahren", correct: false }, { text: "Nach 30 Jahren", correct: false }, { text: "Nach 3 Jahren", correct: true }, { text: "Nach 1 Jahr", correct: false } ] },
+            { question: "Was kennzeichnet den 'Besitz' im rechtlichen Sinne?", explanation: "Besitz ist nach § 854 Abs. 1 BGB die rein tatsächliche Sachherrschaft, während Eigentum die rechtliche Herrschaft beschreibt.", answers: [ { text: "Rechtliche Zuordnung.", correct: false }, { text: "Grundbucheintrag.", correct: false }, { text: "Recht zur Zerstörung.", correct: false }, { text: "Tatsächliche Sachherrschaft.", correct: true } ] },
+            { question: "Ein 16-Jähriger kauft ein Videospiel vom Taschengeld. Wirksam?", explanation: "Nach § 110 BGB ('Taschengeldparagraph') wird der Vertrag erst wirksam, wenn die Leistung mit den Mitteln vollständig BEWIRKT (bezahlt) wurde.", answers: [ { text: "Sofort voll wirksam.", correct: false }, { text: "Ja, sobald vollständig bezahlt.", correct: true }, { text: "Nein, immer nichtig.", correct: false }, { text: "Nur mit Eltern-Zustimmung.", correct: false } ] },
+            { question: "Welches Recht hat der Käufer bei einem Sachmangel primär?", explanation: "Das Gesetz gibt dem Verkäufer das 'Recht zur zweiten Andienung'. Daher ist die Nacherfüllung (§ 439 BGB) vorrangig.", answers: [ { text: "Nacherfüllung", correct: true }, { text: "Rücktritt", correct: false }, { text: "Minderung", correct: false }, { text: "Schadensersatz", correct: false } ] },
+            { question: "Welche Form ist für einen Grundstückskauf vorgeschrieben?", explanation: "Um Übereilung zu verhindern und Beweise zu sichern, schreibt § 311b Abs. 1 BGB die notarielle Beurkundung vor.", answers: [ { text: "Textform", correct: false }, { text: "Mündlich mit Zeugen", correct: false }, { text: "Notarielle Beurkundung", correct: true }, { text: "Schriftform", correct: false } ] },
+            { question: "Was versteht man unter 'culpa in contrahendo' (c.i.c.)?", explanation: "Die c.i.c. (§ 311 Abs. 2 BGB) regelt die Haftung für Pflichtverletzungen bereits während der Vertragsanbahnung.", answers: [ { text: "Verschulden bei Anbahnung.", correct: true }, { text: "Inhaltsirrtum.", correct: false }, { text: "Zufälliger Untergang.", correct: false }, { text: "Nachträgliche Unmöglichkeit.", correct: false } ] },
+            { question: "Wer ist laut BGB ein 'Erfüllungsgehilfe'?", explanation: "Nach § 278 BGB ist Erfüllungsgehilfe, wer mit Wissen und Wollen des Schuldners bei der Erfüllung einer Verbindlichkeit tätig wird.", answers: [ { text: "Gesetzlicher Helfer.", correct: false }, { text: "Wird zur Erfüllung bedient.", correct: true }, { text: "Ohne Auftrag tätig.", correct: false }, { text: "Gerichtlicher Betreuer.", correct: false } ] }
         ];
 
+        /* Logik Variablen */
+        let currentQuestionIndex = 0;
+        let score = 0;
         const openBtn = document.getElementById('open-quiz-btn');
         const quizContainer = document.getElementById('quiz-container');
         const quizBody = document.getElementById('quiz-body');
@@ -394,38 +301,29 @@
         const questionText = document.getElementById('question-text');
         const answerButtons = document.getElementById('answer-buttons');
         const progressText = document.getElementById('question-progress');
-        const scoreText = document.getElementById('score-text');
-        const resultMsg = document.getElementById('result-message');
-        const restartBtn = document.getElementById('restart-btn');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const nextBtn = document.getElementById('next-btn');
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let acceptingAnswers = true;
-
+        /* Start Quiz Event */
         openBtn.addEventListener('click', () => {
             openBtn.parentElement.style.display = 'none';
             quizContainer.classList.remove('hidden');
-            setTimeout(() => { quizContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
             startQuiz();
+            setTimeout(() => { quizContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
         });
 
-        restartBtn.addEventListener('click', startQuiz);
-
         function startQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
+            currentQuestionIndex = 0; score = 0;
             quizResult.classList.add('hidden');
             quizBody.classList.remove('hidden');
             showQuestion();
         }
 
         function showQuestion() {
-            acceptingAnswers = true;
-            quizBody.classList.remove('fade-in');
-            void quizBody.offsetWidth; // Trigger reflow für Animation
-            quizBody.classList.add('fade-in');
+            explanationContainer.classList.add('hidden');
+            while (answerButtons.firstChild) { answerButtons.removeChild(answerButtons.firstChild); }
             
-            resetState();
             let currentQuestion = questions[currentQuestionIndex];
             progressText.innerText = `Frage ${currentQuestionIndex + 1} / ${questions.length}`;
             questionText.innerText = currentQuestion.question;
@@ -440,46 +338,44 @@
             });
         }
 
-        function resetState() {
-            while (answerButtons.firstChild) { answerButtons.removeChild(answerButtons.firstChild); }
-        }
-
         function selectAnswer(e) {
-            if (!acceptingAnswers) return;
-            acceptingAnswers = false; // Verhindert Doppel-Klicks
             const selectedBtn = e.target;
             const isCorrect = selectedBtn.dataset.correct === "true";
+            
+            // Antworten deaktivieren
+            Array.from(answerButtons.children).forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.correct === "true") btn.classList.add('correct');
+            });
 
-            if (isCorrect) {
-                selectedBtn.classList.add('correct');
-                score++;
-            } else {
-                selectedBtn.classList.add('wrong');
-                // Richtige Antwort anzeigen
-                Array.from(answerButtons.children).forEach(btn => {
-                    if (btn.dataset.correct === "true") btn.classList.add('correct');
-                });
-            }
+            if (isCorrect) { score++; } else { selectedBtn.classList.add('wrong'); }
 
-            // 1 Sekunde warten, damit der User sieht, ob es richtig/falsch war, dann zur nächsten Frage sliden
-            setTimeout(() => {
-                currentQuestionIndex++;
-                if (currentQuestionIndex < questions.length) {
-                    showQuestion();
-                } else {
-                    showScore();
-                }
-            }, 1000);
+            // Erklärung anzeigen
+            explanationText.innerText = questions[currentQuestionIndex].explanation;
+            explanationContainer.classList.remove('hidden');
         }
+
+        nextBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) { showQuestion(); } else { showScore(); }
+        });
 
         function showScore() {
             quizBody.classList.add('hidden');
             quizResult.classList.remove('hidden');
-            scoreText.innerText = score;
-            
-            if (score >= 9) resultMsg.innerText = "Prädikatsniveau! Exzellentes Grundwissen.";
-            else if (score >= 6) resultMsg.innerText = "Gutes solides Wissen, aber Luft nach oben.";
-            else resultMsg.innerText = "Ein Blick in den Palandt (Grüneberg) wäre ratsam.";
+            document.getElementById('score-text').innerText = score;
+            const msg = document.getElementById('result-message');
+            if (score >= 9) msg.innerText = "Prädikatsniveau! Exzellentes Wissen.";
+            else if (score >= 6) msg.innerText = "Solide Leistung. Bleib dran!";
+            else msg.innerText = "Zeit, den Palandt/Grüneberg aufzuschlagen...";
+        }
+
+        document.getElementById('restart-btn').addEventListener('click', startQuiz);
+        function toggle(btn) {
+            btn.classList.toggle("active");
+            var panel = btn.nextElementSibling;
+            panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+            btn.querySelector("span").innerHTML = panel.style.maxHeight ? "-" : "+";
         }
     </script>
 </body>
