@@ -177,7 +177,7 @@
         .answer-btn.correct { border-color: #4caf50; color: #4caf50; background: rgba(76, 175, 80, 0.05); }
         .answer-btn.wrong { border-color: #f44336; color: #f44336; background: rgba(244, 67, 54, 0.05); }
 
-        /* NEU: Erklärungs-Box Styles */
+        /* Erklärungs-Box Styles */
         .explanation-box {
             margin-top: 25px; padding: 20px; border-left: 2px solid var(--gold);
             background: rgba(255, 255, 255, 0.02); text-align: left; font-size: 0.9rem;
@@ -265,19 +265,73 @@
         <div style="margin-top: 60px;">
             <button class="acc-btn" onclick="toggle(this)">Disclaimer <span>+</span></button>
             <div class="panel">
-                <p style="padding: 20px 0;">JuraCon bietet persönliche Ersteinschätzungen ohne Gewähr. Dies ersetzt keine anwaltliche Beratung.</p>
+                <p style="padding: 20px 0;">
+                    JuraCon hat es sich zur Aufgabe gemacht, rechtliche Fragestellungen für jeden zugänglich zu machen – unabhängig davon, ob es sich um akademische Themen im Rahmen des Studiums oder um reale juristische Alltagsherausforderungen handelt.<br><br>
+                    Unsere Ersteinschätzungen werden <strong>nicht automatisiert generiert</strong>, sondern persönlich und individuell verfasst, mit höchstem Anspruch an Präzision und Verständlichkeit.<br><br>
+                    Wir bitten jedoch um Verständnis, dass keine rechtliche Verpflichtung zur Beantwortung von Anfragen besteht. Ebenso übernehmen wir keine Gewähr für die Richtigkeit, Vollständigkeit oder Aktualität der bereitgestellten Informationen. Dies ersetzt in keinem Fall eine professionelle anwaltliche Beratung. Ein Mandatsverhältnis kommt durch die Nutzung dieses Dienstes nicht zustande.
+                </p>
+            </div>
+
+            <button class="acc-btn" onclick="toggle(this)">Vorschläge & Feedback <span>+</span></button>
+            <div class="panel">
+                <div style="padding: 20px 0;">
+                    <p style="margin-bottom: 15px;">Wir optimieren JuraCon stetig. Sende uns deine Vorschläge oder Feedback zur User Experience:</p>
+                    <form id="feedbackForm" action="https://formspree.io/f/mbdpagwz" method="POST">
+                        <input type="hidden" name="Kategorie" value="Neues Feedback / Vorschlag">
+                        <textarea name="Feedback" placeholder="DEINE VORSCHLÄGE..." rows="2" required style="width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border); color: #fff; padding: 10px 0; margin-bottom: 20px; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; resize: none;"></textarea>
+                        <button type="submit" class="submit-btn" id="fBtn" style="padding: 12px; font-size: 10px; border-color: var(--dim); color: var(--dim);">FEEDBACK SENDEN</button>
+                    </form>
+                    <div id="fMsg" class="success" style="padding: 15px; font-size: 10px;">DANKE FÜR DEIN FEEDBACK.</div>
+                </div>
             </div>
         </div>
     </main>
 
     <footer>
-        <a href="impressum.html" class="f-link">Impressum</a>
-        <a href="datenschutz.html" class="f-link">Datenschutz</a>
+        <div style="margin-bottom: 20px;">
+            <a href="impressum.html" class="f-link">Impressum</a>
+            <a href="datenschutz.html" class="f-link">Datenschutz</a>
+        </div>
         <a href="https://www.tiktok.com/@juracon5" class="f-link" style="color:var(--gold)" target="_blank">// FOLLOW ON TIKTOK</a>
     </footer>
 
     <script>
-        /* Quiz-Daten mit Erklärungen */
+        /* Accordion Logic */
+        function toggle(btn) {
+            btn.classList.toggle("active");
+            var panel = btn.nextElementSibling;
+            if (panel.style.maxHeight) { panel.style.maxHeight = null; } 
+            else { panel.style.maxHeight = panel.scrollHeight + "px"; }
+            btn.querySelector("span").innerHTML = panel.style.maxHeight ? "-" : "+";
+        }
+
+        /* Form Submissions */
+        var f = document.getElementById("mainForm");
+        f.onsubmit = async (e) => {
+            e.preventDefault();
+            var b = document.getElementById("sBtn");
+            b.innerHTML = "SENDING...";
+            fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' }})
+            .then(r => { if(r.ok) { f.style.display="none"; document.getElementById("msg").style.display="block"; } });
+        };
+
+        var ff = document.getElementById("feedbackForm");
+        ff.onsubmit = async (e) => {
+            e.preventDefault();
+            var fb = document.getElementById("fBtn");
+            fb.innerHTML = "SENDING...";
+            fetch(ff.action, { method: 'POST', body: new FormData(ff), headers: { 'Accept': 'application/json' }})
+            .then(r => { 
+                if(r.ok) { 
+                    ff.style.display="none"; 
+                    document.getElementById("fMsg").style.display="block"; 
+                    var panel = ff.closest('.panel');
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        };
+
+        /* Quiz Logic */
         const questions = [
             { question: "Ab wann beginnt die Rechtsfähigkeit des Menschen laut BGB?", explanation: "Gemäß § 1 BGB beginnt die Rechtsfähigkeit mit der Vollendung der Geburt. Ab diesem Moment kann man Träger von Rechten und Pflichten sein.", answers: [ { text: "Mit der Volljährigkeit", correct: false }, { text: "Mit der Vollendung der Geburt", correct: true }, { text: "Mit der Zeugung", correct: false }, { text: "Mit dem 7. Lebensjahr", correct: false } ] },
             { question: "Was besagt das Abstraktionsprinzip im deutschen Zivilrecht?", explanation: "Es trennt strikt zwischen dem Verpflichtungsgeschäft (Kaufvertrag) und dem Verfügungsgeschäft (Übereignung). Beide sind rechtlich unabhängig voneinander wirksam.", answers: [ { text: "Mündliche Verträge sind erlaubt.", correct: false }, { text: "Verpflichtungs- und Verfügungsgeschäft sind rechtlich unabhängig.", correct: true }, { text: "Alles muss schriftlich sein.", correct: false }, { text: "Eigentum ist gleich Besitz.", correct: false } ] },
@@ -291,7 +345,6 @@
             { question: "Wer ist laut BGB ein 'Erfüllungsgehilfe'?", explanation: "Nach § 278 BGB ist Erfüllungsgehilfe, wer mit Wissen und Wollen des Schuldners bei der Erfüllung einer Verbindlichkeit tätig wird.", answers: [ { text: "Gesetzlicher Helfer.", correct: false }, { text: "Wird zur Erfüllung bedient.", correct: true }, { text: "Ohne Auftrag tätig.", correct: false }, { text: "Gerichtlicher Betreuer.", correct: false } ] }
         ];
 
-        /* Logik Variablen */
         let currentQuestionIndex = 0;
         let score = 0;
         const openBtn = document.getElementById('open-quiz-btn');
@@ -305,7 +358,6 @@
         const explanationText = document.getElementById('explanation-text');
         const nextBtn = document.getElementById('next-btn');
 
-        /* Start Quiz Event */
         openBtn.addEventListener('click', () => {
             openBtn.parentElement.style.display = 'none';
             quizContainer.classList.remove('hidden');
@@ -342,7 +394,6 @@
             const selectedBtn = e.target;
             const isCorrect = selectedBtn.dataset.correct === "true";
             
-            // Antworten deaktivieren
             Array.from(answerButtons.children).forEach(btn => {
                 btn.disabled = true;
                 if (btn.dataset.correct === "true") btn.classList.add('correct');
@@ -350,9 +401,11 @@
 
             if (isCorrect) { score++; } else { selectedBtn.classList.add('wrong'); }
 
-            // Erklärung anzeigen
             explanationText.innerText = questions[currentQuestionIndex].explanation;
             explanationContainer.classList.remove('hidden');
+            
+            // Wenn man ganz unten auf dem Bildschirm ist, sanft zur Erklärung scrollen
+            setTimeout(() => { explanationContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
         }
 
         nextBtn.addEventListener('click', () => {
@@ -371,12 +424,6 @@
         }
 
         document.getElementById('restart-btn').addEventListener('click', startQuiz);
-        function toggle(btn) {
-            btn.classList.toggle("active");
-            var panel = btn.nextElementSibling;
-            panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
-            btn.querySelector("span").innerHTML = panel.style.maxHeight ? "-" : "+";
-        }
     </script>
 </body>
 </html>
