@@ -147,13 +147,13 @@
 
         .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px var(--gold); }
 
-        /* Quiz Styles */
-        .quiz-start-wrapper { margin-top: 50px; margin-bottom: 40px; text-align: center; }
+        /* Quiz & Skripte Start Buttons */
+        .quiz-start-wrapper { margin-top: 40px; margin-bottom: 15px; text-align: center; }
         .quiz-start-btn {
             background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 15px 35px;
             font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 3px;
             text-transform: uppercase; cursor: pointer; transition: all 0.4s ease;
-            box-shadow: 0 0 15px var(--gold-glow); border-radius: 4px;
+            box-shadow: 0 0 15px var(--gold-glow); border-radius: 4px; width: 100%; max-width: 400px;
         }
         .quiz-start-btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 25px var(--gold-glow); transform: translateY(-2px); }
 
@@ -163,7 +163,7 @@
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 25px;
         }
-        .quiz-header h3 { font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+        .quiz-header h3 { font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin: 0;}
 
         #question-text { font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6; text-align: left; }
         .btn-grid { display: flex; flex-direction: column; gap: 12px; }
@@ -177,7 +177,7 @@
         .answer-btn.correct { border-color: #4caf50; color: #4caf50; background: rgba(76, 175, 80, 0.05); }
         .answer-btn.wrong { border-color: #f44336; color: #f44336; background: rgba(244, 67, 54, 0.05); }
 
-        /* Erklärungs-Box Styles */
+        /* Erklärungs-Box Styles (Quiz) */
         .explanation-box {
             margin-top: 25px; padding: 20px; border-left: 2px solid var(--gold);
             background: rgba(255, 255, 255, 0.02); text-align: left; font-size: 0.9rem;
@@ -194,6 +194,28 @@
 
         .fade-in { animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+        /* NEU: Lern-Skripte Styles */
+        .script-text-container {
+            max-height: 60vh;
+            overflow-y: auto;
+            text-align: left;
+            padding-right: 15px;
+        }
+        
+        /* Edler Scrollbar für das Skript */
+        .script-text-container::-webkit-scrollbar { width: 6px; }
+        .script-text-container::-webkit-scrollbar-track { background: transparent; }
+        .script-text-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        .script-text-container:hover::-webkit-scrollbar-thumb { background: var(--gold); }
+
+        .script-content h3 { color: var(--gold); margin-top: 35px; margin-bottom: 15px; font-size: 1.2rem; font-family: 'Montserrat', sans-serif; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+        .script-content h3:first-child { margin-top: 0; }
+        .script-content h4 { color: #fff; margin-top: 20px; margin-bottom: 10px; font-size: 1.05rem; }
+        .script-content p { color: var(--dim); margin-bottom: 12px; font-size: 0.95rem; line-height: 1.7; }
+        .script-content ul { padding-left: 20px; margin-bottom: 20px; color: var(--dim); font-size: 0.95rem; line-height: 1.7;}
+        .script-content li { margin-bottom: 8px; }
+        .script-content strong { color: #fff; font-weight: 600; }
 
         /* Accordion Styles */
         .acc-btn {
@@ -234,14 +256,19 @@
             <div class="item"><span>Mietminderung wegen Eigenbedarf...</span></div>
         </div>
 
-        <div class="quiz-start-wrapper">
-            <button id="open-quiz-btn" class="quiz-start-btn">TESTE DEIN JURA-WISSEN</button>
+        <div id="interactive-triggers">
+            <div class="quiz-start-wrapper">
+                <button id="open-quiz-btn" class="quiz-start-btn">TESTE DEIN JURA-WISSEN</button>
+            </div>
+            <div class="quiz-start-wrapper" style="margin-top: 15px;">
+                <button id="open-scripts-btn" class="quiz-start-btn" style="border-color: var(--dim); color: var(--dim); box-shadow: none;">LERN-SKRIPTE</button>
+            </div>
         </div>
 
         <div id="quiz-container" class="glass-card hidden">
             <div class="quiz-header">
                 <h3>BGB-Quiz</h3>
-                <span id="question-progress">Frage 1 / 10</span>
+                <span id="question-progress" style="color: var(--dim); font-size: 12px; letter-spacing: 1px;">Frage 1 / 10</span>
             </div>
             
             <div id="quiz-body" class="fade-in">
@@ -259,6 +286,143 @@
                 <p style="font-size: 1.2rem; margin-bottom: 10px;">Punkte: <strong id="score-text" style="color: var(--gold); font-size: 1.5rem;">0</strong> / 10</p>
                 <p id="result-message" style="color: var(--dim); margin-bottom: 30px; font-size: 0.9rem;"></p>
                 <button id="restart-btn" class="submit-btn" style="border-color: var(--gold); color: var(--gold);">QUIZ NEU STARTEN</button>
+            </div>
+        </div>
+
+        <div id="scripts-container" class="glass-card hidden">
+            <div class="quiz-header">
+                <h3>JuraCon Bibliothek</h3>
+                <button id="close-scripts-btn" class="btn-outline" style="border:none; padding: 5px 10px; font-size: 14px; cursor: pointer;">X</button>
+            </div>
+
+            <div id="scripts-menu" class="fade-in text-left">
+                <p style="color: var(--dim); margin-bottom: 20px; text-align: left;">Wähle ein Rechtsgebiet, um das Skript zu öffnen:</p>
+                <div class="btn-grid">
+                    <button class="answer-btn" onclick="openScript('bgb-at')" style="border-color: var(--gold);">BGB AT - Allgemeiner Teil</button>
+                    <button class="answer-btn" style="opacity: 0.4; cursor: not-allowed;">Schuldrecht AT (In Bearbeitung)</button>
+                    <button class="answer-btn" style="opacity: 0.4; cursor: not-allowed;">Strafrecht AT (In Bearbeitung)</button>
+                </div>
+            </div>
+
+            <div id="script-bgb-at" class="hidden fade-in">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 style="color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1.1rem; letter-spacing: 2px;">BGB AT</h2>
+                    <button class="btn-outline" onclick="backToScriptsMenu()" style="border: none; padding: 5px;">&larr; ZURÜCK</button>
+                </div>
+                
+                <div class="script-text-container script-content">
+                    <h3>I. Grundlagen & Vertragsschluss</h3>
+                    <h4>1. Privatautonomie</h4>
+                    <p><strong>Definition:</strong> Prinzip der Selbstbestimmung des Einzelnen im Rechtsverkehr.</p>
+                    <p><strong>Vertragsfreiheit:</strong></p>
+                    <ul>
+                        <li><strong>Abschlussfreiheit:</strong> Freiheit zu entscheiden, ob und mit wem ein Vertrag geschlossen wird (Gegenteil: Kontrahierungszwang).</li>
+                        <li><strong>Gestaltungsfreiheit:</strong> Freiheit, den Inhalt des Vertrages weitgehend frei zu bestimmen (Grenzen: §§ 134, 138 BGB).</li>
+                    </ul>
+
+                    <h4>2. Das Rechtsgeschäft (RG)</h4>
+                    <ul>
+                        <li><strong>Einseitige RG:</strong> Erfordern nur eine Willenserklärung (WE).<br><em>Beispiele:</em> Testament, Kündigung, Anfechtung, Rücktritt.</li>
+                        <li><strong>Mehrseitige RG:</strong> Bestehen aus mindestens zwei kongruenten (übereinstimmenden) WE.<br><em>Beispiele:</em> Verträge aller Art (Kauf, Miete, Übereignung).</li>
+                    </ul>
+
+                    <h4>3. Zustandekommen des Vertrages</h4>
+                    <p>Ein Vertrag kommt durch zwei korrespondierende, in Bezug aufeinander abgegebene WE zustande: Angebot und Annahme (§§ 145 ff. BGB).</p>
+                    <ul>
+                        <li><strong>Willenserklärung (WE):</strong> Privatrechtliche Willensäußerung, die auf die Herbeiführung einer Rechtsfolge gerichtet ist.</li>
+                        <li><strong>Angebot:</strong> Einseitig empfangsbedürftige WE, die den Vertragsschluss so bestimmt anträgt, dass das Zustandekommen nur noch vom bloßen Einverständnis des Empfängers abhängt.<br><strong>Essentialia negotii:</strong> Das Angebot muss die wesentlichen Vertragspunkte enthalten (Vertragsparteien, Kaufgegenstand, Preis).</li>
+                        <li><strong>Annahme:</strong> Grundsätzlich empfangsbedürftige WE, durch die der Antragsempfänger dem Angebot vollumfänglich und fristgerecht zustimmt.<br><strong>Annahmefrist unter Anwesenden (§ 147 I 2 BGB):</strong> Einem Anwesenden gegenüber kann ein Angebot nur sofort angenommen werden. (Begriff der Anwesenheit erfordert keinen gemeinsamen Raum, sondern die Möglichkeit des unmittelbaren Dialogs, z.B. Telefonat).</li>
+                    </ul>
+
+                    <h3>II. Tatbestand der Willenserklärung</h3>
+                    <h4>1. Objektiver (äußerer) Tatbestand</h4>
+                    <p>Was wurde für einen objektiven Dritten erkennbar nach außen erklärt?</p>
+                    <ul>
+                        <li><strong>Ausdrückliches Verhalten:</strong> Mündliche oder schriftliche Erklärung.</li>
+                        <li><strong>Konkludentes Verhalten:</strong> Schlüssiges Verhalten, bei dem der Handelnde zwar unmittelbar einen anderen Zweck verfolgt, mittelbar aber auf einen Geschäftswillen geschlossen werden kann.</li>
+                        <li><strong>Schweigen:</strong> Grundsätzlich ein rechtliches Nullum (keine WE).<br><em>Ausnahmen:</em> Gesetzliche Regelungen (z.B. § 108 II BGB), Vertragliche Vereinbarung, Kaufmännisches Bestätigungsschreiben (KBS).</li>
+                        <li><strong>Invitatio ad offerendum:</strong> Bloße Aufforderung zur Abgabe eines Angebots. Es fehlt der Rechtsbindungswille (RBW).<br><em>Zweck:</em> Der Händler will sich nicht gegenüber unendlich vielen Personen verpflichten und möchte sich die Auswahl liquider Partner vorbehalten (z.B. Schaufensterauslage).</li>
+                    </ul>
+
+                    <h4>2. Subjektiver (innerer) Tatbestand</h4>
+                    <ul>
+                        <li><strong>Handlungswille:</strong> Bewusstsein, überhaupt eine willentliche Handlung vorzunehmen. Fehlen führt zur Nichtigkeit.</li>
+                        <li><strong>Erklärungsbewusstsein:</strong> Bewusstsein, etwas rechtlich Relevantes zu erklären (Rechtsbindungswille).<br><em>Problem (Trierer Weinversteigerung):</em> Nach der h.M. (Erklärungstheorie) liegt eine WE vor, wenn der Erklärende bei pflichtgemäßer Sorgfalt hätte erkennen können, dass sein Verhalten als WE verstanden wird. Rechtsfolge: WE wirksam, aber analog § 119 I Alt. 1 BGB anfechtbar.</li>
+                        <li><strong>Geschäftswille:</strong> Wille, eine ganz bestimmte Rechtsfolge herbeizuführen. Ein Fehlen berührt die Wirksamkeit nicht, berechtigt aber zur Anfechtung.</li>
+                    </ul>
+
+                    <h4>3. Abgrenzung: Gefälligkeit vs. Vertrag</h4>
+                    <ul>
+                        <li><strong>Gefälligkeitsverhältnis:</strong> Rein gesellschaftlicher Bereich ohne Rechtsbindungswille. (Indizien: Unentgeltlichkeit, Alltäglichkeit).</li>
+                        <li><strong>Gefälligkeitsvertrag:</strong> Einseitig verpflichtendes Schuldverhältnis (z. B. Auftrag, § 662 BGB) mit Rechtsbindungswille.</li>
+                    </ul>
+
+                    <h3>III. Auslegung und Wirksamwerden</h3>
+                    <h4>1. Auslegung von WE (§§ 133, 157 BGB)</h4>
+                    <p><strong>Objektiver Empfängerhorizont:</strong> Maßgeblich ist, wie ein verständiger Dritter unter Berücksichtigung aller Umstände und der Verkehrssitte die Erklärung verstehen durfte.</p>
+                    <p><strong>Falsa demonstratio non nocet:</strong> Eine übereinstimmende Falschbezeichnung schadet nicht. Es gilt das tatsächlich Gewollte.</p>
+
+                    <h4>2. Dissens (§§ 154, 155 BGB)</h4>
+                    <ul>
+                        <li><strong>Offener Dissens (§ 154 BGB):</strong> Parteien wissen, dass ein Punkt noch nicht geregelt ist. Im Zweifel ist der Vertrag nicht geschlossen.</li>
+                        <li><strong>Versteckter Dissens (§ 155 BGB):</strong> Parteien glauben fälschlich, sich geeinigt zu haben. Vertrag gilt nur dann als geschlossen, wenn anzunehmen ist, dass er auch ohne den fehlenden Punkt geschlossen worden wäre.</li>
+                    </ul>
+
+                    <h4>3. Wirksamwerden empfangsbedürftiger WE (§ 130 BGB)</h4>
+                    <ul>
+                        <li><strong>Abgabe:</strong> Die WE wird willentlich so in den Rechtsverkehr gebracht, dass mit dem Zugang beim Empfänger zu rechnen ist.</li>
+                        <li><strong>Zugang unter Abwesenden:</strong> Wenn die WE so in den Machtbereich des Empfängers gelangt ist, dass dieser unter normalen Umständen die Möglichkeit der Kenntnisnahme hat.</li>
+                        <li><strong>Widerruf (§ 130 I 2 BGB):</strong> Die WE wird nicht wirksam, wenn dem Empfänger vorher oder gleichzeitig ein Widerruf zugeht.</li>
+                    </ul>
+
+                    <h3>IV. Geschäftsfähigkeit (§§ 104 ff. BGB)</h3>
+                    <h4>1. Geschäftsunfähigkeit (§ 104 BGB)</h4>
+                    <p>Wer das 7. Lebensjahr noch nicht vollendet hat oder an einer dauerhaften krankhaften Störung der Geistestätigkeit leidet. <strong>Rechtsfolge:</strong> WE ist nichtig (§ 105 I BGB).</p>
+                    
+                    <h4>2. Beschränkte Geschäftsfähigkeit (§§ 106 ff. BGB)</h4>
+                    <p>Minderjährige zwischen 7 und 18 Jahren.</p>
+                    <ul>
+                        <li><strong>Zustimmungsbedürftigkeit (§ 107 BGB):</strong> Einwilligung des Vertreters erforderlich, außer das Geschäft ist lediglich rechtlich vorteilhaft. (Verpflichtungsgeschäfte sind nie lediglich rechtlich vorteilhaft).</li>
+                        <li><strong>Taschengeldparagraph (§ 110 BGB):</strong> Vertrag wird wirksam, wenn der Minderjährige die Leistung mit Mitteln bewirkt, die ihm zu diesem Zweck überlassen wurden.</li>
+                        <li><strong>Schwebende Unwirksamkeit:</strong> Ohne Einwilligung geschlossene Verträge hängen von der nachträglichen Genehmigung (§ 184 BGB) ab.</li>
+                    </ul>
+
+                    <h3>V. Stellvertretung (§§ 164 ff. BGB)</h3>
+                    <h4>1. Voraussetzungen</h4>
+                    <ul>
+                        <li><strong>Zulässigkeit:</strong> Keine Stellvertretung bei höchstpersönlichen Geschäften.</li>
+                        <li><strong>Eigene WE:</strong> Abgrenzung zum Boten. Der Vertreter hat einen eigenen Entscheidungsspielraum.</li>
+                        <li><strong>Offenkundigkeit:</strong> Handeln im Namen des Vertretenen (§ 164 I 1 BGB). Ausnahme: Geschäft für den, den es angeht (Bargeschäfte des täglichen Lebens).</li>
+                        <li><strong>Vertretungsmacht:</strong> Gesetzlich oder rechtsgeschäftlich (Vollmacht).</li>
+                    </ul>
+
+                    <h4>2. Vollmacht und Missbrauch</h4>
+                    <p>Formfrei erteilbar (§ 167 II). Erlischt mit dem Grundverhältnis. Handelt der Vertreter ohne Vertretungsmacht (falsus procurator), ist der Vertrag schwebend unwirksam (§ 177 I BGB) und er haftet nach § 179 BGB.</p>
+
+                    <h3>VI. Anfechtung (§§ 119 ff. BGB)</h3>
+                    <h4>1. Anfechtungsgründe</h4>
+                    <ul>
+                        <li><strong>Inhaltsirrtum (§ 119 I Alt. 1):</strong> Erklärender weiß was er sagt, aber nicht was es bedeutet.</li>
+                        <li><strong>Erklärungsirrtum (§ 119 I Alt. 2):</strong> Versprechen, Verschreiben.</li>
+                        <li><strong>Eigenschaftsirrtum (§ 119 II):</strong> Irrtum über verkehrswesentliche Eigenschaften (nicht der Preis!).</li>
+                        <li><strong>Arglistige Täuschung / Drohung (§ 123).</strong></li>
+                    </ul>
+                    <h4>2. Rechtsfolgen</h4>
+                    <p>Ex-tunc-Nichtigkeit (§ 142 I BGB). Schadensersatzpflicht auf das negative Interesse (§ 122 BGB), außer bei § 123 BGB.</p>
+
+                    <h3>VII. Wirksamkeitshindernisse & Form</h3>
+                    <ul>
+                        <li><strong>Gesetzliches Verbot (§ 134 BGB):</strong> Verstoß gegen ein Verbotsgesetz führt zur Nichtigkeit.</li>
+                        <li><strong>Sittenwidrigkeit & Wucher (§ 138 BGB):</strong> Verstoß gegen das Anstandsgefühl bzw. Ausbeutung einer Zwangslage (Nichtigkeit).</li>
+                        <li><strong>Formvorschriften (§§ 125 ff. BGB):</strong> Grundsatz ist Formfreiheit. Mangelnde Form (z.B. Notarielle Beurkundung bei Grundstücken) führt zur Nichtigkeit, kann aber oft durch Vollzug geheilt werden.</li>
+                    </ul>
+
+                    <h3>VIII. AGB-Kontrolle (§§ 305 ff. BGB)</h3>
+                    <p>Gilt für vorformulierte Vertragsbedingungen. Wichtig ist die Einbeziehung (§ 305 II BGB). Bei der Inhaltskontrolle fallen überraschende Klauseln (§ 305c BGB) oder solche, die gegen Klauselverbote (§§ 308, 309 BGB) und die Generalklausel (§ 307 BGB) verstoßen, weg. Der Vertrag bleibt im Übrigen wirksam (§ 306 BGB).</p>
+
+                    <h3>IX. Verjährung (§§ 194 ff. BGB)</h3>
+                    <p><strong>Regelmäßige Frist:</strong> 3 Jahre (§ 195 BGB). Beginn ist das Ende des Jahres, in dem der Anspruch entstanden ist und der Gläubiger Kenntnis erlangt hat. Wirkung: Der Schuldner hat ein Leistungsverweigerungsrecht.</p>
+                </div>
             </div>
         </div>
 
@@ -331,6 +495,60 @@
             });
         };
 
+        /* UI Navigation Logic (Buttons ausblenden/einblenden) */
+        const interactiveTriggers = document.getElementById('interactive-triggers');
+        
+        // Quiz Elemente
+        const openQuizBtn = document.getElementById('open-quiz-btn');
+        const quizContainer = document.getElementById('quiz-container');
+        
+        // Skripte Elemente
+        const openScriptsBtn = document.getElementById('open-scripts-btn');
+        const scriptsContainer = document.getElementById('scripts-container');
+        const closeScriptsBtn = document.getElementById('close-scripts-btn');
+        const scriptsMenu = document.getElementById('scripts-menu');
+        const scriptBgbAt = document.getElementById('script-bgb-at');
+
+        // Quiz öffnen
+        openQuizBtn.addEventListener('click', () => {
+            interactiveTriggers.style.display = 'none';
+            quizContainer.classList.remove('hidden');
+            startQuiz();
+            setTimeout(() => { quizContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
+        });
+
+        // Skripte öffnen
+        openScriptsBtn.addEventListener('click', () => {
+            interactiveTriggers.style.display = 'none';
+            scriptsContainer.classList.remove('hidden');
+            setTimeout(() => { scriptsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+        });
+
+        // Skripte schließen (X Button)
+        closeScriptsBtn.addEventListener('click', () => {
+            scriptsContainer.classList.add('hidden');
+            interactiveTriggers.style.display = 'block';
+            // Setze Skripte Ansicht zurück auf Menü
+            backToScriptsMenu();
+        });
+
+        // Skript Auswahl Logik
+        function openScript(scriptId) {
+            scriptsMenu.classList.add('hidden');
+            if(scriptId === 'bgb-at') {
+                scriptBgbAt.classList.remove('hidden');
+                // Sanft nach oben scrollen innerhalb des Skripts
+                document.querySelector('.script-text-container').scrollTop = 0;
+            }
+        }
+
+        // Zurück zum Skripte Menü
+        function backToScriptsMenu() {
+            scriptBgbAt.classList.add('hidden');
+            scriptsMenu.classList.remove('hidden');
+        }
+
+
         /* Quiz Logic */
         const questions = [
             { question: "Ab wann beginnt die Rechtsfähigkeit des Menschen laut BGB?", explanation: "Gemäß § 1 BGB beginnt die Rechtsfähigkeit mit der Vollendung der Geburt. Ab diesem Moment kann man Träger von Rechten und Pflichten sein.", answers: [ { text: "Mit der Volljährigkeit", correct: false }, { text: "Mit der Vollendung der Geburt", correct: true }, { text: "Mit der Zeugung", correct: false }, { text: "Mit dem 7. Lebensjahr", correct: false } ] },
@@ -347,8 +565,6 @@
 
         let currentQuestionIndex = 0;
         let score = 0;
-        const openBtn = document.getElementById('open-quiz-btn');
-        const quizContainer = document.getElementById('quiz-container');
         const quizBody = document.getElementById('quiz-body');
         const quizResult = document.getElementById('quiz-result');
         const questionText = document.getElementById('question-text');
@@ -357,13 +573,6 @@
         const explanationContainer = document.getElementById('explanation-container');
         const explanationText = document.getElementById('explanation-text');
         const nextBtn = document.getElementById('next-btn');
-
-        openBtn.addEventListener('click', () => {
-            openBtn.parentElement.style.display = 'none';
-            quizContainer.classList.remove('hidden');
-            startQuiz();
-            setTimeout(() => { quizContainer.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
-        });
 
         function startQuiz() {
             currentQuestionIndex = 0; score = 0;
@@ -404,7 +613,6 @@
             explanationText.innerText = questions[currentQuestionIndex].explanation;
             explanationContainer.classList.remove('hidden');
             
-            // Wenn man ganz unten auf dem Bildschirm ist, sanft zur Erklärung scrollen
             setTimeout(() => { explanationContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
         }
 
